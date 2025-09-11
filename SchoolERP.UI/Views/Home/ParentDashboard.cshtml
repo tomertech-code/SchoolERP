@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Parent Dashboard";
+}
+
+<div class="container mt-4">
+    <h2 class="text-warning">Welcome, Parent</h2>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3">
+                <h5>Child's Progress</h5>
+                <a href="/Reports/ChildProgress" class="btn btn-warning btn-sm mt-2">View</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3">
+                <h5>Exam Results</h5>
+                <a href="/Exams/Results" class="btn btn-success btn-sm mt-2">View</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3">
+                <h5>Complaints</h5>
+                <a href="/StudentComplaints/Index" class="btn btn-danger btn-sm mt-2">View</a>
+            </div>
+        </div>
+    </div>
+</div>

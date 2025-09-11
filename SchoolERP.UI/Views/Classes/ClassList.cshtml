@@ -1,0 +1,36 @@
+﻿@model IEnumerable<SchoolERP.Data.Entities.Class>
+
+@{
+    ViewData["Title"] = "Class List";
+}
+
+<h1 class="text-center my-4">@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="CreateClass" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassName)
+            </th>
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassName)
+                </td>
+                <td class="text-center">
+                    <a asp-action="EditClass" asp-route-id="@item.ClassId" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="DeleteClass" asp-route-id="@item.ClassId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this class?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Student Dashboard";
+}
+
+<div class="container mt-4">
+    <h2 class="text-info">Welcome, Student</h2>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3">
+                <h5>My Assignments</h5>
+                <a href="/Assignments/MyAssignments" class="btn btn-info btn-sm mt-2">View</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3">
+                <h5>Exams</h5>
+                <a href="/Exams/MyExams" class="btn btn-success btn-sm mt-2">View</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3">
+                <h5>Complaints</h5>
+                <a href="/StudentComplaints/Create" class="btn btn-danger btn-sm mt-2">Register</a>
+            </div>
+        </div>
+    </div>
+</div>
