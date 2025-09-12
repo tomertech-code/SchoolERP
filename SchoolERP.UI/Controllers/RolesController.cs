@@ -32,7 +32,7 @@ namespace SchoolERP.UI.Controllers
         {
             var result = await _roleService.CreateRoleAsync(roleName);
             if (result.Success)
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(RolesIndex));
 
             ViewBag.Error = result.Message;
             return View();
@@ -76,10 +76,10 @@ namespace SchoolERP.UI.Controllers
         {
             var result = await _roleService.DeleteRoleAsync(id);
             if (result.Success)
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(RolesIndex));
 
             ViewBag.Error = result.Message;
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(RolesIndex));
         }
     }
 }

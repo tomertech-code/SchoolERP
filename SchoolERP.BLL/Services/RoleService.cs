@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using SchoolERP.BLL.Interfaces;
+using SchoolERP.Common.DTOs;
 using SchoolERP.Common.Constants;
 
-namespace SchoolERP.BLL.Services
+namespace SchoolERP.Business.Services
 {
     public class RoleService : IRoleService
     {
@@ -18,57 +14,65 @@ namespace SchoolERP.BLL.Services
             _roleManager = roleManager;
         }
 
-        public async Task<ApiResponse<IEnumerable<IdentityRole>>> GetAllRolesAsync()
+        public async Task<ApiResponse<IEnumerable<RoleDto>>> GetAllRolesAsync()
         {
-            var roles = _roleManager.Roles.ToList();
-            return ApiResponse<IEnumerable<IdentityRole>>.Ok(roles, "Roles retrieved successfully");
+            var roles = _roleManager.Roles
+                .Select(r => new RoleDto
+                {
+                    Id = r.Id,
+                    Name = r.Name
+                })
+                .ToList();
+
+            return ApiResponse<IEnumerable<RoleDto>>.Ok(roles);
         }
 
-        public async Task<ApiResponse<IdentityRole>> GetRoleByIdAsync(string roleId)
+        public async Task<ApiResponse<RoleDto>> GetRoleByIdAsync(string id)
         {
-            var role = await _roleManager.FindByIdAsync(roleId);
+            var role = await _roleManager.FindByIdAsync(id);
             if (role == null)
-                return ApiResponse<IdentityRole>.Fail("Role not found");
-            return ApiResponse<IdentityRole>.Ok(role, "Role retrieved successfully");
+                return ApiResponse<RoleDto>.Fail("Role not found");
+
+            return ApiResponse<RoleDto>.Ok(new RoleDto
+            {
+                Id = role.Id,
+                Name = role.Name
+            });
         }
 
-        public async Task<ApiResponse<string>> CreateRoleAsync(string roleName)
+        public async Task<ApiResponse<bool>> CreateRoleAsync(string roleName)
         {
-            if (await _roleManager.RoleExistsAsync(roleName))
-                return ApiResponse<string>.Fail("Role already exists");
-
             var result = await _roleManager.CreateAsync(new IdentityRole(roleName));
-            if (result.Succeeded)
-                return ApiResponse<string>.Ok("Role created successfully");
-
-            return ApiResponse<string>.Fail(string.Join(", ", result.Errors.Select(e => e.Description)));
+            return result.Succeeded
+                ? ApiResponse<bool>.Ok(true, "Role created successfully")
+                : ApiResponse<bool>.Fail(string.Join(", ", result.Errors.Select(e => e.Description)));
         }
 
-        public async Task<ApiResponse<string>> UpdateRoleAsync(string roleId, string newName)
+        public async Task<ApiResponse<bool>> UpdateRoleAsync(string id, string name)
         {
-            var role = await _roleManager.FindByIdAsync(roleId);
-            if (role == null) return ApiResponse<string>.Fail("Role not found");
+            var role = await _roleManager.FindByIdAsync(id);
+            if (role == null)
+                return ApiResponse<bool>.Fail("Role not found");
 
-            role.Name = newName;
+            role.Name = name;
             var result = await _roleManager.UpdateAsync(role);
 
-            if (result.Succeeded)
-                return ApiResponse<string>.Ok("Role updated successfully");
-
-            return ApiResponse<string>.Fail(string.Join(", ", result.Errors.Select(e => e.Description)));
+            return result.Succeeded
+                ? ApiResponse<bool>.Ok(true, "Role updated successfully")
+                : ApiResponse<bool>.Fail(string.Join(", ", result.Errors.Select(e => e.Description)));
         }
 
-        public async Task<ApiResponse<string>> DeleteRoleAsync(string roleId)
+        public async Task<ApiResponse<bool>> DeleteRoleAsync(string id)
         {
-            var role = await _roleManager.FindByIdAsync(roleId);
-            if (role == null) return ApiResponse<string>.Fail("Role not found");
+            var role = await _roleManager.FindByIdAsync(id);
+            if (role == null)
+                return ApiResponse<bool>.Fail("Role not found");
 
             var result = await _roleManager.DeleteAsync(role);
 
-            if (result.Succeeded)
-                return ApiResponse<string>.Ok("Role deleted successfully");
-
-            return ApiResponse<string>.Fail(string.Join(", ", result.Errors.Select(e => e.Description)));
+            return result.Succeeded
+                ? ApiResponse<bool>.Ok(true, "Role deleted successfully")
+                : ApiResponse<bool>.Fail(string.Join(", ", result.Errors.Select(e => e.Description)));
         }
     }
 }

@@ -7,7 +7,7 @@
 <h1>StudentComplaintList</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="CreateComplaint">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -31,7 +31,7 @@
                 @Html.DisplayNameFor(model => model.ResolvedDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ComplaintCategory)
+                @Html.DisplayNameFor(model => model.ComplaintCategory)  
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ResolvedByNavigation)
@@ -79,9 +79,9 @@
                 @Html.DisplayFor(modelItem => item.Teacher.TeacherId)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ComplaintId">Edit</a> |
+                    <a asp-action="EditComplaint" asp-route-id="@item.ComplaintId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ComplaintId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ComplaintId">Delete</a>
+                    <a asp-action="DeleteComplaint" asp-route-id="@item.ComplaintId">Delete</a>
             </td>
         </tr>
 }
