@@ -1,0 +1,44 @@
+﻿@model SchoolERP.Data.Entities.Timetable
+
+@{
+    ViewData["Title"] = "Edit Timetable";
+}
+
+<h2>Edit Timetable</h2>
+
+<form asp-action="EditTimetable" method="post">
+    <input type="hidden" asp-for="TimetableId" />
+
+    <div class="form-group">
+        <label>Class</label>
+        <select asp-for="ClassId" asp-items="ViewBag.Classes" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label>Section</label>
+        <select asp-for="SectionId" asp-items="ViewBag.Sections" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label>Subject</label>
+        <select asp-for="SubjectId" asp-items="ViewBag.Subjects" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label>Teacher</label>
+        <select asp-for="TeacherId" asp-items="ViewBag.Teachers" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label>Period</label>
+        <input asp-for="PeriodId" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Day of Week</label>
+        <input asp-for="DayOfWeek" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Update</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

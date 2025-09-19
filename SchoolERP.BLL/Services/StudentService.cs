@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -56,6 +57,11 @@ namespace SchoolERP.BLL.Services
             _unitOfWork.Repository<Student>().Remove(student);
             await _unitOfWork.SaveChangesAsync();
             return ApiResponse<bool>.Ok(true, "Student deleted successfully");
+        }
+
+        public Task<IEnumerable> GetAllAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

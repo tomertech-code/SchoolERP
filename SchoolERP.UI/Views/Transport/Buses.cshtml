@@ -1,0 +1,37 @@
+﻿@model IEnumerable<SchoolERP.Data.Entities.Bus>
+
+@{
+    ViewData["Title"] = "Buses";
+}
+
+<h2>Buses</h2>
+
+<a asp-action="CreateBus" class="btn btn-primary mb-3">Add New Bus</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Bus Number</th>
+            <th>Driver Name</th>
+            <th>Route</th>
+            <th>Capacity</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bus in Model)
+        {
+            <tr>
+                <td>@bus.BusNumber</td>
+                <td>@bus.DriverName</td>
+                <td>@bus.Route</td>
+                <td>@bus.DriverPhone</td>
+                <td>
+                    <a asp-action="EditBus" asp-route-id="@bus.BusId" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="DeleteBus" asp-route-id="@bus.BusId" class="btn btn-sm btn-danger"
+                       onclick="return confirm('Are you sure you want to delete this bus?');">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

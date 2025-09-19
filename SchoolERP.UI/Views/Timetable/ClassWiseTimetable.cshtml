@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SchoolERP.Data.Entities.Timetable>
+
+@{
+    ViewData["Title"] = "Class-wise Timetable";
+}
+
+<h2>Class-wise Timetable</h2>
+
+<form asp-action="ClassWiseTimetable" method="post">
+    <div class="form-group">
+        <label>Select Class</label>
+        <select name="classId" asp-items="ViewBag.Classes" class="form-control" onchange="this.form.submit()">
+            <option value="">-- Select Class --</option>
+        </select>
+    </div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Period</th>
+                <th>Subject</th>
+                <th>Teacher</th>
+                <th>Section</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.DayOfWeek</td>
+                    <td>@item.Period?.PeriodName</td>
+                    <td>@item.Subject?.SubjectName</td>
+                    <td>@item.Teacher?.FirstName</td>
+                    <td>@item.Section?.SectionName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="text-muted mt-3">No timetable found for the selected class.</p>
+}

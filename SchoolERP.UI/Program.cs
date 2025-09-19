@@ -19,31 +19,47 @@ builder.Services.AddDbContext<SchoolERPDbContext>(options =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<SchoolERPDbContext>()
     .AddDefaultTokenProviders();
-
+// Add services
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Auto logout after 30 mins
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";
     options.AccessDeniedPath = "/Account/AccessDenied";
 });
 
-     // Register the service
+// Register the service
 
 // Add custom services BEFORE Build
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IStudentService, StudentService>();
-builder.Services.AddScoped<ITeacherService, TeacherService>();
-builder.Services.AddScoped<IStudentComplaintService, StudentComplaintService>();
 builder.Services.AddScoped<IAssignmentService, AssignmentService>();
-builder.Services.AddScoped<IRoleService, RoleService>();
-
-builder.Services.AddScoped<IClassService, ClassService>();
-builder.Services.AddScoped<ISectionService, SectionService>();
-builder.Services.AddScoped<ISubjectService, SubjectService>();
-builder.Services.AddScoped<ILoggerManager, LoggerManager>();
 builder.Services.AddScoped<IAttendanceService, AttendanceService>();
-builder.Services.AddScoped<IExamService, ExamService>();
+builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IBookIssueService, BookIssueService>();
+builder.Services.AddScoped<IClassService, ClassService>();
 builder.Services.AddScoped<IExamResultService, ExamResultService>();
+builder.Services.AddScoped<IExamService, ExamService>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<IParentService, ParentService>();
+builder.Services.AddScoped<IPtmService, PtmService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<ISectionService, SectionService>();
+builder.Services.AddScoped<IStaffService, StaffService>();
+builder.Services.AddScoped<IStudentComplaintService, StudentComplaintService>();
+builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<ISubjectService, SubjectService>();
+builder.Services.AddScoped<ITeacherService, TeacherService>();
+builder.Services.AddScoped<ITimetableService, TimetableService>();
+builder.Services.AddScoped<ITransportService, TransportService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 builder.Services.AddSingleton<FileUploadService>();
+builder.Services.AddScoped<ILoggerManager, LoggerManager>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -71,7 +87,7 @@ app.UseRouting();
 
 app.UseAuthentication();   // 👈 Required before Authorization
 app.UseAuthorization();
-
+app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Account}/{action=Login}/{id?}");

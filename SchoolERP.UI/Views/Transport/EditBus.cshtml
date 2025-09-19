@@ -1,0 +1,34 @@
+﻿@model SchoolERP.Data.Entities.Bus
+
+@{
+    ViewData["Title"] = "Edit Bus";
+}
+
+<h2>Edit Bus</h2>
+
+<form asp-action="EditBus" method="post">
+    <input type="hidden" asp-for="BusId" />
+
+    <div class="form-group">
+        <label>Bus Number</label>
+        <input asp-for="BusNumber" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Driver Name</label>
+        <input asp-for="DriverName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Route</label>
+        <input asp-for="Route" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Driver Phone</label>
+        <input asp-for="DriverPhone" class="form-control" type="text" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Update</button>
+    <a asp-action="Buses" class="btn btn-secondary">Cancel</a>
+</form>

@@ -30,24 +30,38 @@ namespace SchoolERP.UI.Controllers
         }
 
         // 🔹 POST: Login
+        // 🔹 POST: Login
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(
-                    model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-
-                if (result.Succeeded)
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user != null)
                 {
-                    return RedirectToLocal(returnUrl);
+                    var result = await _signInManager.PasswordSignInAsync(
+                        user.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
+
+                    if (result.Succeeded)
+                    {
+                        // ✅ Store session
+                        HttpContext.Session.SetString("UserId", user.Id);
+                        HttpContext.Session.SetString("UserName", user.FullName ?? user.UserName);
+                        HttpContext.Session.SetString("Email", user.Email ?? "");
+
+                        var roles = await _userManager.GetRolesAsync(user);
+                        HttpContext.Session.SetString("Role", roles.FirstOrDefault() ?? "User");
+
+                        return RedirectToLocal(returnUrl);
+                    }
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
             return View(model);
         }
+
 
         // 🔹 GET: Register
         [HttpGet]
@@ -94,6 +108,7 @@ namespace SchoolERP.UI.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
+            HttpContext.Session.Clear(); // ✅ clear session
             return RedirectToAction("Login", "Account");
         }
 

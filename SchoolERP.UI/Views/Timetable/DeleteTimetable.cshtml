@@ -1,0 +1,24 @@
+﻿@model SchoolERP.Data.Entities.Timetable
+
+@{
+    ViewData["Title"] = "Delete Timetable";
+}
+
+<h2>Delete Timetable</h2>
+
+<h4>Are you sure you want to delete this timetable?</h4>
+
+<div>
+    <strong>Class:</strong> @Model.Class?.ClassName <br />
+    <strong>Section:</strong> @Model.Section?.SectionName <br />
+    <strong>Subject:</strong> @Model.Subject?.SubjectName <br />
+    <strong>Teacher:</strong> @Model.Teacher?.FirstName <br />
+    <strong>Period:</strong> @Model.Period?.PeriodName <br />
+    <strong>Day:</strong> @Model.DayOfWeek
+</div>
+
+<form asp-action="DeleteTimetableConfirmed" method="post">
+    <input type="hidden" asp-for="TimetableId" />
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

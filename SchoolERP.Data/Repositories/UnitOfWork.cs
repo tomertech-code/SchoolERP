@@ -1,48 +1,44 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SchoolERP.Data.DbContext;
+﻿using SchoolERP.Data.DbContext;
 using SchoolERP.Data.Interfaces;
+using SchoolERP.Data.Repositories;
+using System.Collections;
 
-namespace SchoolERP.Data.Repositories
+public class UnitOfWork : IUnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    private readonly SchoolERPDbContext _context;
+    private Hashtable _repositories;
+
+    public UnitOfWork(SchoolERPDbContext context)
     {
-        private readonly SchoolERPDbContext _context;
-        private Hashtable _repositories;
+        _context = context;
+    }
 
-        public UnitOfWork(SchoolERPDbContext context)
+    // 👇 Add this so services can use DbContext directly
+    public SchoolERPDbContext Context => _context;
+
+    public IRepository<T> Repository<T>() where T : class
+    {
+        if (_repositories == null)
+            _repositories = new Hashtable();
+
+        var type = typeof(T).Name;
+
+        if (!_repositories.ContainsKey(type))
         {
-            _context = context;
+            var repositoryInstance = new Repository<T>(_context);
+            _repositories.Add(type, repositoryInstance);
         }
 
-        public IRepository<T> Repository<T>() where T : class
-        {
-            if (_repositories == null)
-                _repositories = new Hashtable();
+        return (IRepository<T>)_repositories[type];
+    }
 
-            var type = typeof(T).Name;
+    public async Task<int> SaveChangesAsync()
+    {
+        return await _context.SaveChangesAsync();
+    }
 
-            if (!_repositories.ContainsKey(type))
-            {
-                var repositoryInstance = new Repository<T>(_context);
-                _repositories.Add(type, repositoryInstance);
-            }
-
-            return (IRepository<T>)_repositories[type];
-        }
-
-        public async Task<int> SaveChangesAsync()
-        {
-            return await _context.SaveChangesAsync();
-        }
-
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
+    public void Dispose()
+    {
+        _context.Dispose();
     }
 }

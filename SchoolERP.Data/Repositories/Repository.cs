@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SchoolERP.Data.DbContext;
+using SchoolERP.Data.Entities;
 using SchoolERP.Data.Interfaces;
 
 namespace SchoolERP.Data.Repositories
@@ -14,6 +15,7 @@ namespace SchoolERP.Data.Repositories
     {
         private readonly SchoolERPDbContext _context;
         private readonly DbSet<T> _dbSet;
+        private IEnumerable<object> includes;
 
         public Repository(SchoolERPDbContext context)
         {
@@ -59,6 +61,29 @@ namespace SchoolERP.Data.Repositories
         public void RemoveRange(IEnumerable<T> entities)
         {
             _dbSet.RemoveRange(entities);
+        }
+
+
+
+        public async Task<IEnumerable<T>> GetAllWithIncludeAsync(params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _dbSet;
+
+            foreach (var include in includes)
+                query = query.Include(include);
+
+            return await query.ToListAsync();
+        }
+
+        public async Task<T?> GetByIdWithIncludeAsync(Expression<Func<T, bool>> predicate,
+                                                     params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _dbSet;
+
+            foreach (var include in includes)
+                query = query.Include(include);
+
+            return await query.FirstOrDefaultAsync(predicate);
         }
     }
 }

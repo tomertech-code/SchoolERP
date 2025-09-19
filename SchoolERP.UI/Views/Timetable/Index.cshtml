@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SchoolERP.Data.Entities.Timetable>
+
+@{
+    ViewData["Title"] = "Timetable List";
+}
+
+<h2>Timetables</h2>
+<p>
+    <a asp-action="AddTimetable" class="btn btn-primary">+ Add New Timetable</a>
+    <a asp-action="ClassWiseTimetable" class="btn btn-info">📅 Class-wise Timetable</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Class</th>
+            <th>Section</th>
+            <th>Subject</th>
+            <th>Teacher</th>
+            <th>Period</th>
+            <th>Day</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Class?.ClassName</td>
+                <td>@item.Section?.SectionName</td>
+                <td>@item.Subject?.SubjectName</td>
+                <td>@item.Teacher?.FirstName</td>
+                <td>@item.Period?.PeriodName</td>
+                <td>@item.DayOfWeek</td>
+                <td>
+                    <a asp-action="EditTimetable" asp-route-id="@item.TimetableId" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="DeleteTimetable" asp-route-id="@item.TimetableId" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

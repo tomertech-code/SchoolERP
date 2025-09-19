@@ -1,0 +1,35 @@
+﻿@model IEnumerable<SchoolERP.Data.Entities.StudentTransport>
+
+@{
+    ViewData["Title"] = "Student Transport Mapping";
+}
+
+<h2>Student Transport Mapping</h2>
+
+<a asp-action="AssignStudentToBus" class="btn btn-primary mb-3">Assign Student to Bus</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Bus Number</th>
+            <th>Route</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var mapping in Model)
+        {
+            <tr>
+                <td>@mapping.Student</td>
+                <td>@mapping.Bus?.BusNumber</td>
+                <td>@mapping.Bus?.Route</td>
+                <td>
+                    <a asp-action="RemoveStudentFromBus" asp-route-id="@mapping.StudentId"
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('Remove this student from bus?');">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

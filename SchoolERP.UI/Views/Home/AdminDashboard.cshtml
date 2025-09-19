@@ -3,31 +3,58 @@
 }
 
 <div class="container mt-4">
-    <h2 class="text-primary">Welcome, Admin</h2>
+    <h2 class="text-center text-primary">Welcome, Admin</h2>
     <div class="row mt-4">
-        <div class="col-md-3">
-            <div class="card shadow-sm p-3">
-                <h5>Manage Teachers</h5>
-                <a href="/Teacher/Index" class="btn btn-primary btn-sm mt-2">Go</a>
+        <!-- Manage Teachers -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-lg p-4 border-light rounded">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <i class="bi bi-person-badge fs-3 text-primary"></i>
+                    <h5 class="card-title">Manage Teachers</h5>
+                </div>
+                <p class="card-text">View, add, and manage teachers in the system.</p>
+                <a href="/Teacher/Index" class="btn btn-primary btn-lg w-100 mt-2">Go</a>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card shadow-sm p-3">
-                <h5>Manage Students</h5>
-                <a href="/Students/Index" class="btn btn-success btn-sm mt-2">Go</a>
+
+        <!-- Manage Students -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-lg p-4 border-light rounded">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <i class="bi bi-person-lines-fill fs-3 text-success"></i>
+                    <h5 class="card-title">Manage Students</h5>
+                </div>
+                <p class="card-text">View, add, and manage student profiles and details.</p>
+                <a href="/Students/Index" class="btn btn-success btn-lg w-100 mt-2">Go</a>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card shadow-sm p-3">
-                <h5>Complaints</h5>
-                <a href="/StudentComplaint/StudentComplaintList" class="btn btn-danger btn-sm mt-2">Go</a>
+
+        <!-- Complaints -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-lg p-4 border-light rounded">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <i class="bi bi-flag-fill fs-3 text-danger"></i>
+                    <h5 class="card-title">Complaints</h5>
+                </div>
+                <p class="card-text">Manage student complaints and feedback.</p>
+                <a href="/StudentComplaint/StudentComplaintList" class="btn btn-danger btn-lg w-100 mt-2">Go</a>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card shadow-sm p-3">
-                <h5>Roles & Users</h5>
-                <a href="/Roles/RolesIndex" class="btn btn-warning btn-sm mt-2">Go</a>
+
+        <!-- Roles & Users -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-lg p-4 border-light rounded">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <i class="bi bi-person-lock fs-3 text-warning"></i>
+                    <h5 class="card-title">Roles & Users</h5>
+                </div>
+                <p class="card-text">Manage roles and users within the system.</p>
+                <a href="/Roles/RolesIndex" class="btn btn-warning btn-lg w-100 mt-2">Go</a>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script> <!-- Bootstrap Icons -->
+}

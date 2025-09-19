@@ -48,6 +48,7 @@ public partial class SchoolERPDbContext : IdentityDbContext<ApplicationUser>
     public virtual DbSet<HostelRoom> HostelRooms { get; set; }
 
     public virtual DbSet<Notice> Notices { get; set; }
+    public virtual DbSet<Notification> Notifications { get; set; }
 
     public virtual DbSet<Parent> Parents { get; set; }
 
@@ -379,6 +380,7 @@ public partial class SchoolERPDbContext : IdentityDbContext<ApplicationUser>
 
             entity.HasOne(d => d.Role).WithMany(p => p.Users).HasConstraintName("FK__Users__RoleId__3A81B327");
         });
+      
 
         OnModelCreatingPartial(modelBuilder);
     }

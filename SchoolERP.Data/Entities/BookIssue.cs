@@ -14,12 +14,13 @@ public partial class BookIssue
     public int? BookId { get; set; }
 
     public int? StudentId { get; set; }
+    public bool IsReturn { get; set; }
 
     public DateOnly? IssueDate { get; set; }
 
     public DateOnly? DueDate { get; set; }
 
-    public DateOnly? ReturnDate { get; set; }
+    public DateTime? ReturnDate { get; set; }
 
     [ForeignKey("BookId")]
     [InverseProperty("BookIssues")]

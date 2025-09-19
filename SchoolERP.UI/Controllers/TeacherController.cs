@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using SchoolERP.BLL.Interfaces;
+using SchoolERP.Data.DbContext;
 using SchoolERP.Data.Entities;
 
 namespace SchoolERP.UI.Controllers
@@ -11,11 +14,12 @@ namespace SchoolERP.UI.Controllers
     public class TeacherController : Controller
         {
             private readonly ITeacherService _teacherService;
-
-            public TeacherController(ITeacherService teacherService)
+        private readonly SchoolERPDbContext _context;
+        public TeacherController(ITeacherService teacherService, SchoolERPDbContext context)
             {
                 _teacherService = teacherService;
-            }
+            _context = context;
+        }
 
         // GET: Teacher
         public async Task<IActionResult> Index()
@@ -42,10 +46,11 @@ namespace SchoolERP.UI.Controllers
                 return View(teacher);
             }
 
-            // GET: Teacher/Create
+        // GET: Teacher/Create
             public IActionResult Create()
-            {
-                return View();
+        {
+            ViewBag.SubjectId = new SelectList(_context.Subjects, "SubjectId", "SubjectName");
+            return View();
             }
 
             // POST: Teacher/Create

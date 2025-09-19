@@ -21,18 +21,22 @@ namespace SchoolERP.BLL.Services
 
         public async Task<ApiResponse<IEnumerable<Teacher>>> GetAllTeachersAsync()
         {
-            var teachers = await _unitOfWork.Repository<Teacher>().GetAllAsync();
+            var teachers = await _unitOfWork.Repository<Teacher>()
+                .GetAllWithIncludeAsync(t => t.Subject, t => t.User);
+
             return ApiResponse<IEnumerable<Teacher>>.Ok(teachers);
         }
 
         public async Task<ApiResponse<Teacher>> GetTeacherByIdAsync(int id)
         {
-            var teacher = await _unitOfWork.Repository<Teacher>().GetByIdAsync(id);
+            var teacher = await _unitOfWork.Repository<Teacher>()
+                .GetByIdWithIncludeAsync(t => t.TeacherId == id, t => t.Subject, t => t.User);
+
             if (teacher == null)
                 return ApiResponse<Teacher>.Fail("Teacher not found");
+
             return ApiResponse<Teacher>.Ok(teacher);
         }
-
         public async Task<ApiResponse<bool>> AddTeacherAsync(Teacher teacher)
         {
             await _unitOfWork.Repository<Teacher>().AddAsync(teacher);
