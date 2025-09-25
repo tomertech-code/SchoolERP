@@ -53,21 +53,36 @@ namespace SchoolERP.UI.Controllers
             return View();
             }
 
-            // POST: Teacher/Create
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            public async Task<IActionResult> Create(Teacher teacher)
+        // POST: Teacher/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Teacher teacher)
+        {
+            if (!ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    await _teacherService.AddTeacherAsync(teacher);
-                    return RedirectToAction(nameof(Index));
-                }
                 return View(teacher);
             }
 
-            // GET: Teacher/Edit/5
-            public async Task<IActionResult> Edit(int id)
+            try
+            {
+                // ignore Photo completely
+                _context.Teachers.Add(teacher);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Teacher added successfully!";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                TempData["ErrorMessage"] = "Something went wrong while adding the teacher.";
+                return View(teacher);
+            }
+        }
+
+
+        // GET: Teacher/Edit/5
+        public async Task<IActionResult> Edit(int id)
             {
                 var teacher = await _teacherService.GetTeacherByIdAsync(id);
                 if (teacher == null) return NotFound();

@@ -23,6 +23,17 @@ public partial class Teacher
 
     [StringLength(20)]
     public string? Phone { get; set; }
+    public string? EmailId { get; set; }
+    public string? Address { get; set; }
+    public DateTime? DateOfBirth { get; set; }
+   
+    public string? PlaceOfBirth { get; set; }
+    //public string? Photo { get; set; }
+    public string? University { get; set; }
+    public string? Degree { get; set; }
+    public DateTime? EndDate { get; set; }
+    public DateTime? StartDate { get; set; }
+    public string? City { get; set; }
 
     public DateOnly? HireDate { get; set; }
 
