@@ -55,8 +55,12 @@ namespace SchoolERP.UI.Controllers
 
                         return RedirectToLocal(returnUrl);
                     }
+                    else
+                    {
+                        return RedirectToAction("AccessDenied");
+                    }
                 }
-
+                
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
             return View(model);

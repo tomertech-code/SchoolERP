@@ -64,12 +64,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="UserId" class="control-label">User</label>
-                            <select asp-for="UserId" class="form-control form-control-lg">
+                            <select asp-for="UserId" asp-items="ViewBag.UserId" class="form-control form-control-lg">
                                 <option value="">Select User</option>
-                                @foreach (var item in (ViewBag.UserId as SelectList))
-                                {
-                                    <option value="@item.Value">@item.Text</option>
-                                }
                             </select>
                             <span asp-validation-for="UserId" class="text-danger"></span>
                         </div>
@@ -79,16 +75,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="ClassId" class="control-label">Class</label>
-                            <select asp-for="ClassId" class="form-control form-control-lg">
+                            <select asp-for="ClassId" asp-items="ViewBag.ClassId" class="form-control form-control-lg">
                                 <option value="">Select Class</option>
-                                @foreach (var item in ViewBag.ClassId as SelectList)
-                                {
-                                    <option value="@item.Value">@item.Text</option>
-                                }
                             </select>
                             <span asp-validation-for="ClassId" class="text-danger"></span>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="row">

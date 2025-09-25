@@ -71,4 +71,5 @@ public partial class Student
     [ForeignKey("UserId")]
     [InverseProperty("Students")]
     public virtual User? User { get; set; }
+
 }

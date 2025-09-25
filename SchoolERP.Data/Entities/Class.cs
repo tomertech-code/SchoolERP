@@ -34,4 +34,5 @@ public partial class Class
 
     [InverseProperty("Class")]
     public virtual ICollection<Timetable> Timetables { get; set; } = new List<Timetable>();
+   
 }

@@ -1,53 +1,60 @@
 ﻿@model IEnumerable<SchoolERP.Data.Entities.Student>
 
-@{
+@* @{
     ViewData["Title"] = "Index";
 }
+ *@
 
-<div class="container mt-4">
-    <h1 class="text-center">Student Index</h1>
-
+<div class="main-content flex-grow-1">
     <p class="text-end">
         <a class="btn btn-primary" asp-action="CreateStudent">Create New Student</a>
     </p>
+    <div class="container">
+      @*   <h1 class="text-center mt-4">Student Index</h1>
 
-    <table class="table table-bordered table-striped table-responsive">
-        <thead class="table-light">
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.AdmissionNo)</th>
-                <th>@Html.DisplayNameFor(model => model.FirstName)</th>
-                <th>@Html.DisplayNameFor(model => model.LastName)</th>
-                <th>@Html.DisplayNameFor(model => model.Dob)</th>
-                <th>@Html.DisplayNameFor(model => model.Gender)</th>
-                <th>@Html.DisplayNameFor(model => model.ClassId)</th>
-                <th>@Html.DisplayNameFor(model => model.SectionId)</th>
-                <th>@Html.DisplayNameFor(model => model.Address)</th>
-                <th>@Html.DisplayNameFor(model => model.EnrollmentDate)</th>
-                <th>@Html.DisplayNameFor(model => model.User)</th>
-                <th class="text-center">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+        <p class="text-end">
+            <a class="btn btn-primary" asp-action="CreateStudent">Create New Student</a>
+        </p> *@
+
+        <table class="table table-bordered table-striped table-responsive">
+            <thead class="table-light">
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.AdmissionNo)</td>
-                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Dob)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Gender)</td>
-                    <td>@Html.DisplayFor(modelItem => item.ClassId)</td>
-                    <td>@Html.DisplayFor(modelItem => item.SectionId)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Address)</td>
-                    <td>@Html.DisplayFor(modelItem => item.EnrollmentDate)</td>
-                    <td>@Html.DisplayFor(modelItem => item.User.PasswordHash)</td>
-                    <td class="text-center">
-                        <a class="btn btn-warning btn-sm" asp-action="EditStudent" asp-route-id="@item.StudentId">Edit</a>
-                        <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.StudentId">Details</a>
-                        <a class="btn btn-danger btn-sm" asp-action="DeleteStudent" asp-route-id="@item.StudentId">Delete</a>
-                    </td>
+                    <th>@Html.DisplayNameFor(model => model.AdmissionNo)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                    <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Dob)</th>
+                    <th>@Html.DisplayNameFor(model => model.Gender)</th>
+                    <th>@Html.DisplayNameFor(model => model.ClassId)</th>
+                    <th>@Html.DisplayNameFor(model => model.SectionId)</th>
+                    <th>@Html.DisplayNameFor(model => model.Address)</th>
+                    <th>@Html.DisplayNameFor(model => model.EnrollmentDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.User)</th>
+                    <th class="text-center">Actions</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.AdmissionNo)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Dob)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ClassId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.SectionId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EnrollmentDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.User.PasswordHash)</td>
+                        <td class="text-center">
+                            <a class="btn btn-warning btn-sm" asp-action="EditStudent" asp-route-id="@item.StudentId">Edit</a>
+                            <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.StudentId">Details</a>
+                            <a class="btn btn-danger btn-sm" asp-action="DeleteStudent" asp-route-id="@item.StudentId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 </div>

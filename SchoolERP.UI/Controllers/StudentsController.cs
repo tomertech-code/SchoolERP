@@ -26,7 +26,7 @@ namespace SchoolERP.UI.Controllers
         // GET: Students
         public async Task<IActionResult> Index()
         {
-            _logger.LogInfo("Fetching student list...");
+           
             var result = await _studentService.GetAllStudentsAsync();
 
             if (result.Success)
