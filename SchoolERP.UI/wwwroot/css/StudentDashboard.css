@@ -1,0 +1,60 @@
+﻿
+body {
+    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+.profile-card {
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    color: white;
+}
+
+.avatar {
+    border-radius: 50%;
+}
+
+.progress {
+    height: 8px;
+    border-radius: 4px;
+}
+
+.notice-widget .list-group-item {
+    border: none;
+}
+
+.circle-progress {
+    width: 60px;
+    height: 60px;
+    position: relative;
+}
+
+.progress-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+}
+
+.teachers-profile-slider .card {
+    margin: 0 10px;
+}
+
+@media (max-width: 768px) {
+    .teachers-profile-slider .owl-item {
+        width: 100% !important;
+    }
+}
+/* Custom progress circle styles would need JS for dynamic, but placeholder here */
+

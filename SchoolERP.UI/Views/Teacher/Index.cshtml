@@ -4,62 +4,282 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<style>
+    .badge.badge-soft-success {
+        background: rgba(26, 190, 23, 0.1);
+        color: #1ABE17;
+    }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HireDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Subject)
-            </th>
-            <th>
-                Email
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HireDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subject.SubjectName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TeacherId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TeacherId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TeacherId">Delete</a>
-            </td>
-        </tr>
+    .badge.badge-soft-danger {
+        background: rgba(232, 38, 70, 0.1);
+        color: #E82646;
+    }
+</style>
+<body>
+    <div class="container  ml-auto">
+        <div class="mb-2">
+            <a asp-action="Create" class="btn btn-primary d-flex align-items-center">
+               <span class="material-icons me-2">add_box</span>
+
+                Add Teacher
+            </a>
+        </div>
+    </div>
+   
+
+
+  
+  
+
+
+    <div class="card">
+        <div class="card-header d-flex align-items-center justify-content-between flex-wrap pb-0">
+            <h4 class="mb-3">Teachers List</h4>
+            <div class="d-flex align-items-center flex-wrap">
+                <div class="input-icon-start mb-3 me-2 position-relative">
+                    <span class="icon-addon">
+                        <i class="ti ti-calendar"></i>
+                    </span>
+                    <input type="text" class="form-control date-range bookingrange" placeholder="Select" value="Academic Year : 2024 / 2025">
+                </div>
+                <div class="dropdown mb-3 me-2">
+                    <a href="javascript:void(0);" class="btn btn-outline-light bg-white dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ti ti-filter me-2"></i>Filter</a>
+                    <div class="dropdown-menu drop-width">
+                        <form action="teachers.html">
+                            <div class="d-flex align-items-center border-bottom p-3">
+                                <h4>Filter</h4>
+                            </div>
+                            <div class="p-3 border-bottom pb-0">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Name</label>
+                                            <select class="select select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                                <option data-select2-id="3">Select</option>
+                                                <option>Teresa</option>
+                                                <option>Daniel</option>
+                                                <option>Hellana</option>
+                                            </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-ylw9-container"><span class="select2-selection__rendered" id="select2-ylw9-container" role="textbox" aria-readonly="true" title="Select">Select</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Class</label>
+                                            <select class="select select2-hidden-accessible" data-select2-id="4" tabindex="-1" aria-hidden="true">
+                                                <option data-select2-id="6">Select</option>
+                                                <option>I</option>
+                                                <option>II</option>
+                                                <option>III</option>
+                                            </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="5" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-juzm-container"><span class="select2-selection__rendered" id="select2-juzm-container" role="textbox" aria-readonly="true" title="Select">Select</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Status</label>
+                                            <select class="select select2-hidden-accessible" data-select2-id="7" tabindex="-1" aria-hidden="true">
+                                                <option data-select2-id="9">Select</option>
+                                                <option>Active</option>
+                                                <option>Inactive</option>
+                                            </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="8" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-woz9-container"><span class="select2-selection__rendered" id="select2-woz9-container" role="textbox" aria-readonly="true" title="Select">Select</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3 d-flex align-items-center justify-content-end">
+                                <a href="#" class="btn btn-light me-3">Reset</a>
+                                <button type="submit" class="btn btn-primary">Apply</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center bg-white border rounded-2 p-1 mb-3 me-2">
+                    <a href="teachers.html" class="active btn btn-icon btn-sm me-1 primary-hover"><i class="ti ti-list-tree"></i></a>
+                    <a href="teacher-grid.html" class="btn btn-icon btn-sm bg-light primary-hover"><i class="ti ti-grid-dots"></i></a>
+                </div>
+                <div class="dropdown mb-3">
+                    <a href="javascript:void(0);" class="btn btn-outline-light bg-white dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="ti ti-sort-ascending-2 me-2"></i>Sort by A-Z
+                    </a>
+                    <ul class="dropdown-menu p-3">
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item rounded-1 active">
+                                Ascending
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                                Descending
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                                Recently Viewed
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                                Recently Added
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-0 py-3">
+
+            <!-- Student List -->
+          
+                <div class="col-sm-12">
+                <table class="table table-hover" id="TeacherTable">
+
+
+
+                        <thead class="thead-light">
+                            <tr>
+                                <!-- Checkbox column (no sort) -->
+                                <th class="no-sort">
+                                    <div class="form-check form-check-md">
+                                        <input class="form-check-input" type="checkbox" id="select-all">
+                                    </div>
+                                </th>
+
+                                <!-- Dynamic headers from your model -->
+                                <th>@Html.DisplayNameFor(model => model.TeacherId)</th>
+                                <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                                <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                                @* <th>@Html.DisplayNameFor(model => model.Class)</th> *@
+                                <th>@Html.DisplayNameFor(model => model.Subject)</th>
+                                <th>Email</th>
+                                <th>@Html.DisplayNameFor(model => model.Phone)</th>
+                                <th>@Html.DisplayNameFor(model => model.HireDate)</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+
+                    <tbody class="">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <!-- Checkbox -->
+                                    <td class="sorting_1">
+                                        <div class="form-check form-check-md">
+                                            <input class="form-check-input" type="checkbox" value="@item.TeacherId">
+                                        </div>
+                                    </td>
+
+                                    <!-- Teacher Code -->
+                                    <td>
+                                        <a asp-action="Details" asp-route-id="@item.TeacherId" class="link-primary text-decoration-none">
+                                            T@item.TeacherId
+                                        </a>
+                                    </td>
+
+                                    <!-- Teacher Avatar + Name -->
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                          @*   <a asp-action="Details" asp-route-id="@item.TeacherId" class="avatar avatar-md">
+                                                <img src="~/assets/img/teachers/teacher-01.jpg" class="img-fluid rounded-circle" alt="@item.FirstName" />
+                                            </a> *@
+                                            <div class="ms-2">
+                                                <p class="text-dark mb-0">
+                                                <a asp-action="Details" asp-route-id="@item.TeacherId" class="text-decoration-none">
+                                                        @item.FirstName
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <!-- Class (example: you can bind from item.Class if exists) -->
+                                <td> @item.LastName</td>
+
+                                    <!-- Subject -->
+                                    <td>@item.Subject?.SubjectName</td>
+
+                                    <!-- Email -->
+                                    <td>@item.User?.Email</td>
+
+                                    <!-- Phone -->
+                                    <td>@item.Phone</td>
+
+                                    <!-- Hire Date -->
+                                    <td>@item.HireDate?.ToString("dd MMM yyyy")</td>
+
+                                    <!-- Status -->
+                                    <td>
+                                        @if (item.IsActive == true)
+                                        {
+
+                                        <span class="badge badge-soft-success d-inline-flex align-items-center"><i class="ti ti-circle-filled fs-5 me-1"></i>Active</span>
+                                        }
+                                        else
+                                        {
+                                        <span class="badge badge-soft-danger d-inline-flex align-items-center"><i class="ti ti-circle-filled fs-5 me-1"></i>Inactive</span>
+                                    }
+                                    </td>
+
+                                    <!-- Actions Dropdown -->
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="dropdown">
+                                                <a href="#" class="btn-icon btn-sm d-flex align-items-center justify-content-center rounded-circle p-0 text-decoration-none"
+                                                   data-bs-toggle="dropdown" aria-expanded="false">
+
+                                               <i class="material-icons">more_vert</i>
+                                                </a>
+                                            <ul class="dropdown-menu dropdown-menu-right p-3" data-popper-placement="bottom-end">
+                                                    <li>
+                                                        <a class="dropdown-item rounded-1" asp-action="Details" asp-route-id="@item.TeacherId">
+                                                        <!-- Using Material Icons font -->
+                                                        <span class="material-icons me-2">drag_handle</span>
+
+                                                        Teacher
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item rounded-1" asp-action="Edit" asp-route-id="@item.TeacherId">
+                                                        <span class="material-icons me-2">edit</span>Edit
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                    <a  class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#login_detail">
+                                                        <span class="material-icons me-2">login</span>Login Details
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item rounded-1" href="javascript:void(0);">
+                                                        <span class="material-icons me-2">block</span>Disable
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item rounded-1" asp-action="Delete" asp-route-id="@item.TeacherId">
+                                                        <span class="material-icons me-2">delete</span>Delete
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+
+                    </table>
+                </div>
+
+                <!-- /Student List -->
+            </div>
+        </div>
+   
+
+</body>
+@section Scripts {
+    <script src="~/devloperjs/teachers.js"></script>
+    <script src="~/common/commandatatable.js"></script>
 }
-    </tbody>
-</table>
+
+@* <script asp-src-include="~/devloperjs/teachers.js"></script> *@
+    @* <script src="~/devloperjs/teachers.js"></script> *@

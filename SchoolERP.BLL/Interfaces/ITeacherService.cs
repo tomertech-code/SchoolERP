@@ -15,5 +15,7 @@ namespace SchoolERP.BLL.Interfaces
         Task<ApiResponse<bool>> AddTeacherAsync(Teacher teacher);
         Task<ApiResponse<bool>> UpdateTeacherAsync(Teacher teacher);
         Task<ApiResponse<bool>> DeleteTeacherAsync(int id);
+        Task<ApiResponse<int>> GetTotalTeacherCount();
+        Task<ApiResponse<(int Active, int Deactive)>> GetActiveAndDeactiveTeachers();
     }
 }

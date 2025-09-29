@@ -1,60 +1,375 @@
-﻿@{
-    ViewData["Title"] = "Admin Dashboard";
+﻿@model SchoolERP.UI.ViewModelDTO.AdminDashboardDto
+@{
+    var userName = ViewBag.UserName as string;
+    var total_student = ViewBag.TotalStudent;
+    var total_teacher = ViewBag.TotalTeacher;
+    var Total_Subjects = ViewBag.Totalsubject;
 }
-
-<div class="container mt-4">
-    <h2 class="text-center text-primary">Welcome, Admin</h2>
-    <div class="row mt-4">
-        <!-- Manage Teachers -->
-        <div class="col-md-3 mb-4">
-            <div class="card shadow-lg p-4 border-light rounded">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <i class="bi bi-person-badge fs-3 text-primary"></i>
-                    <h5 class="card-title">Manage Teachers</h5>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+   <link href="~/css/admindashboard.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="dashboard-header p-4">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="mb-1">Welcome Back, @Model.FullName (@Model.Role)</h1>
+                    <p class="mb-0 opacity-75">Have a good day at work</p>
                 </div>
-                <p class="card-text">View, add, and manage teachers in the system.</p>
-                <a href="/Teacher/Index" class="btn btn-primary btn-lg w-100 mt-2">Go</a>
+                <div class="col-md-4 text-md-end">
+                    <div class="d-flex gap-2 justify-content-md-end justify-content-start mt-3 mt-md-0">
+                        <button class="btn btn-light btn-sm">
+                            <i class="bi bi-person-plus me-1"></i>Add Student
+                        </button>
+                        <button class="btn btn-outline-light btn-sm">
+                            <i class="bi bi-currency-dollar me-1"></i>Fees
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Manage Students -->
-        <div class="col-md-3 mb-4">
-            <div class="card shadow-lg p-4 border-light rounded">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <i class="bi bi-person-lines-fill fs-3 text-success"></i>
-                    <h5 class="card-title">Manage Students</h5>
+        <!-- Alert Notification -->
+        <div class="alert alert-notification alert-dismissible fade show" role="alert">
+            <div class="d-flex align-items-center">
+                <div class="me-3">
+                    <img src="https://via.placeholder.com/40" alt="Student" class="rounded-circle" width="40" height="40">
                 </div>
-                <p class="card-text">View, add, and manage student profiles and details.</p>
-                <a href="/Students/Index" class="btn btn-success btn-lg w-100 mt-2">Go</a>
+                <div class="flex-grow-1">
+                    <strong>Fahed III,C</strong> has paid fees for <strong>Term1</strong>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         </div>
 
-        <!-- Complaints -->
-        <div class="col-md-3 mb-4">
-            <div class="card shadow-lg p-4 border-light rounded">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <i class="bi bi-flag-fill fs-3 text-danger"></i>
-                    <h5 class="card-title">Complaints</h5>
+        <!-- Statistics Cards -->
+        <div class="row g-3 mb-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="stat-icon bg-danger bg-opacity-10 text-danger me-3">
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h3 class="mb-0">@Model.TotalSubjects</h3>
+                                <p class="text-muted mb-0">Total Students</p>
+                            </div>
+                            <span class="badge bg-danger">1.2%</span>
+                        </div>
+                        <div class="mt-3 pt-3 border-top d-flex justify-content-between">
+                            <small class="text-muted">Active: <span class="fw-bold">3,643</span></small>
+                            <small class="text-muted">Inactive: <span class="fw-bold">11</span></small>
+                        </div>
+                    </div>
                 </div>
-                <p class="card-text">Manage student complaints and feedback.</p>
-                <a href="/StudentComplaint/StudentComplaintList" class="btn btn-danger btn-lg w-100 mt-2">Go</a>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="stat-icon bg-primary bg-opacity-10 text-primary me-3">
+                                <i class="bi bi-person-badge"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h3 class="mb-0">@Model.TotalTeachers</h3>
+                                <p class="text-muted mb-0">Total Teachers</p>
+                            </div>
+                            <span class="badge bg-info">1.2%</span>
+                        </div>
+                        <div class="mt-3 pt-3 border-top d-flex justify-content-between">
+                            <small class="text-muted">Active: <span class="fw-bold">@Model.ActiveTeachers</span></small>
+                            <small class="text-muted">Inactive: <span class="fw-bold">@Model.InactiveTeachers</span></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="stat-icon bg-warning bg-opacity-10 text-warning me-3">
+                                <i class="bi bi-person-gear"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h3 class="mb-0">162</h3>
+                                <p class="text-muted mb-0">Total Staff</p>
+                            </div>
+                            <span class="badge bg-warning text-dark">1.2%</span>
+                        </div>
+                        <div class="mt-3 pt-3 border-top d-flex justify-content-between">
+                            <small class="text-muted">Active: <span class="fw-bold">161</span></small>
+                            <small class="text-muted">Inactive: <span class="fw-bold">2</span></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="stat-icon bg-success bg-opacity-10 text-success me-3">
+                                <i class="bi bi-book"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h3 class="mb-0">@Model.TotalSubjects</h3>
+                                <p class="text-muted mb-0">Total Subjects</p>
+                            </div>
+                            <span class="badge bg-success">1.2%</span>
+                        </div>
+                        <div class="mt-3 pt-3 border-top d-flex justify-content-between">
+                            <small class="text-muted">Active: <span class="fw-bold">81</span></small>
+                            <small class="text-muted">Inactive: <span class="fw-bold">1</span></small>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Roles & Users -->
-        <div class="col-md-3 mb-4">
-            <div class="card shadow-lg p-4 border-light rounded">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <i class="bi bi-person-lock fs-3 text-warning"></i>
-                    <h5 class="card-title">Roles & Users</h5>
+        <!-- Management Cards -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card management-card border-start border-primary border-3">
+                    <div class="card-body text-center">
+                        <div class="stat-icon bg-primary bg-opacity-10 text-primary mx-auto mb-3">
+                            <i class="bi bi-person-badge fs-4"></i>
+                        </div>
+                        <h5 class="card-title">Manage Teachers</h5>
+                        <p class="card-text text-muted mb-3">View, add, and manage teachers in the system.</p>
+                        <a href="/Teacher/Index" class="btn btn-primary btn-custom w-100">
+                            <i class="bi bi-arrow-right me-1"></i>Go
+                        </a>
+                    </div>
                 </div>
-                <p class="card-text">Manage roles and users within the system.</p>
-                <a href="/Roles/RolesIndex" class="btn btn-warning btn-lg w-100 mt-2">Go</a>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card management-card border-start border-success border-3">
+                    <div class="card-body text-center">
+                        <div class="stat-icon bg-success bg-opacity-10 text-success mx-auto mb-3">
+                            <i class="bi bi-person-lines-fill fs-4"></i>
+                        </div>
+                        <h5 class="card-title">Manage Students</h5>
+                        <p class="card-text text-muted mb-3">View, add, and manage student profiles and details.</p>
+                        <a href="/Students/Index" class="btn btn-success btn-custom w-100">
+                            <i class="bi bi-arrow-right me-1"></i>Go
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card management-card border-start border-danger border-3">
+                    <div class="card-body text-center">
+                        <div class="stat-icon bg-danger bg-opacity-10 text-danger mx-auto mb-3">
+                            <i class="bi bi-flag-fill fs-4"></i>
+                        </div>
+                        <h5 class="card-title">Complaints</h5>
+                        <p class="card-text text-muted mb-3">Manage student complaints and feedback.</p>
+                        <a href="/StudentComplaint/StudentComplaintList" class="btn btn-danger btn-custom w-100">
+                            <i class="bi bi-arrow-right me-1"></i>Go
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card management-card border-start border-warning border-3">
+                    <div class="card-body text-center">
+                        <div class="stat-icon bg-warning bg-opacity-10 text-warning mx-auto mb-3">
+                            <i class="bi bi-person-lock fs-4"></i>
+                        </div>
+                        <h5 class="card-title">Roles & Users</h5>
+                        <p class="card-text text-muted mb-3">Manage roles and users within the system.</p>
+                        <a href="/Roles/RolesIndex" class="btn btn-warning btn-custom w-100 text-dark">
+                            <i class="bi bi-arrow-right me-1"></i>Go
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Stats and Charts Row -->
+        <div class="row g-4 mb-4">
+            <!-- Attendance Overview -->
+            <div class="col-lg-4">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <h5 class="card-title d-flex align-items-center justify-content-between">
+                            <span>Today's Attendance</span>
+                            <i class="bi bi-calendar-check text-primary"></i>
+                        </h5>
+                        <div class="chart-placeholder mb-3">
+                            <span>Attendance Chart</span>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <small class="text-muted">Present</small>
+                                <div class="fw-bold text-success">98.8%</div>
+                            </div>
+                            <div class="col-4">
+                                <small class="text-muted">Absent</small>
+                                <div class="fw-bold text-danger">1.2%</div>
+                            </div>
+                            <div class="col-4">
+                                <small class="text-muted">Late</small>
+                                <div class="fw-bold text-warning">0.1%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Overview -->
+            <div class="col-lg-4">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <h5 class="card-title d-flex align-items-center justify-content-between">
+                            <span>Financial Overview</span>
+                            <i class="bi bi-graph-up text-success"></i>
+                        </h5>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Total Earnings</span>
+                                <strong class="text-success">$64,522</strong>
+                            </div>
+                            <div class="progress progress-custom">
+                                <div class="progress-bar bg-success" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Total Expenses</span>
+                                <strong class="text-danger">$45,320</strong>
+                            </div>
+                            <div class="progress progress-custom">
+                                <div class="progress-bar bg-danger" style="width: 55%"></div>
+                            </div>
+                        </div>
+                        <div class="text-center pt-2 border-top">
+                            <strong class="text-primary">Net Profit: $19,202</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="col-lg-4">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <h5 class="card-title d-flex align-items-center justify-content-between">
+                            <span>Quick Actions</span>
+                            <i class="bi bi-lightning text-warning"></i>
+                        </h5>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-calendar-event me-1"></i>View Calendar
+                            </button>
+                            <button class="btn btn-outline-success btn-sm">
+                                <i class="bi bi-megaphone me-1"></i>New Events
+                            </button>
+                            <button class="btn btn-outline-info btn-sm">
+                                <i class="bi bi-file-earmark-text me-1"></i>Reports
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm">
+                                <i class="bi bi-currency-dollar me-1"></i>Finance
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="card stat-card">
+                    <div class="card-header bg-transparent">
+                        <h5 class="mb-0">Recent Activity</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="stat-icon bg-success bg-opacity-10 text-success me-3" style="width: 2.5rem; height: 2.5rem; font-size: 1rem;">
+                                <i class="bi bi-check-circle"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0">New student registered</h6>
+                                <small class="text-muted">John Smith - Grade 10</small>
+                            </div>
+                            <small class="text-muted">2m ago</small>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="stat-icon bg-info bg-opacity-10 text-info me-3" style="width: 2.5rem; height: 2.5rem; font-size: 1rem;">
+                                <i class="bi bi-currency-dollar"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0">Fee payment received</h6>
+                                <small class="text-muted">Sarah Johnson - $1,200</small>
+                            </div>
+                            <small class="text-muted">5m ago</small>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="stat-icon bg-warning bg-opacity-10 text-warning me-3" style="width: 2.5rem; height: 2.5rem; font-size: 1rem;">
+                                <i class="bi bi-exclamation-triangle"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0">New complaint submitted</h6>
+                                <small class="text-muted">Mike Davis - Facility issue</small>
+                            </div>
+                            <small class="text-muted">10m ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card stat-card">
+                    <div class="card-header bg-transparent">
+                        <h5 class="mb-0">Upcoming Events</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3 p-2 bg-light rounded">
+                            <div class="me-3">
+                                <div class="text-center">
+                                    <div class="fw-bold text-primary">15</div>
+                                    <small class="text-muted">Jul</small>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0">Parent-Teacher Meeting</h6>
+                                <small class="text-muted">09:10 AM - 10:50 PM</small>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-3 p-2 bg-light rounded">
+                            <div class="me-3">
+                                <div class="text-center">
+                                    <div class="fw-bold text-info">07</div>
+                                    <small class="text-muted">Jul</small>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0">Summer Vacation Meeting</h6>
+                                <small class="text-muted">09:10 AM - 10:50 PM</small>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-outline-primary btn-sm">View All Events</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-@section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script> <!-- Bootstrap Icons -->
-}
+  
+</body>
+</html>

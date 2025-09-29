@@ -1,0 +1,407 @@
+﻿
+
+:root {
+    --primary-color: #3d5ee1;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --light-bg: #f8f9fa;
+    --dark-bg: #343a40;
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-info: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--light-bg);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+.container-fluid {
+    max-width: 1400px;
+}
+
+/* Header Styles */
+.dashboard-header {
+    background: var(--gradient-info);
+    color: white;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+    .dashboard-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,0 1000,1000"/></svg>') no-repeat;
+        background-size: cover;
+    }
+
+    .dashboard-header .content {
+        position: relative;
+        z-index: 1;
+    }
+
+.notice-alert {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.75rem;
+}
+
+/* Profile Card */
+.profile-card {
+    background: var(--dark-bg);
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+    .profile-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    }
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 3px solid white;
+}
+
+.teacher-badge {
+    background: rgba(61, 94, 225, 0.2);
+    color: var(--primary-color);
+    border: 1px solid rgba(61, 94, 225, 0.3);
+}
+
+/* Cards */
+.modern-card {
+    background: white;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+    .modern-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow);
+    }
+
+.stat-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+.syllabus-chart {
+    position: relative;
+}
+
+.progress-ring {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+.progress-circle {
+    background: conic-gradient(var(--primary-color) 0deg, var(--primary-color) 342deg, var(--light-bg) 342deg);
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .progress-circle::before {
+        content: '';
+        width: 80px;
+        height: 80px;
+        background: white;
+        border-radius: 50%;
+        position: absolute;
+    }
+
+.progress-text {
+    position: absolute;
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: var(--primary-color);
+}
+
+/* Class Schedule */
+.class-item {
+    background: var(--light-bg);
+    border-radius: 0.75rem;
+    border-left: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+    .class-item:hover {
+        transform: translateX(5px);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .class-item.completed {
+        opacity: 0.7;
+        border-left-color: var(--success-color);
+    }
+
+        .class-item.completed .badge {
+            text-decoration: line-through;
+        }
+
+/* Attendance Chart Placeholder */
+.attendance-chart {
+    height: 250px;
+    background: linear-gradient(45deg, #f8f9fa 25%, transparent 25%), linear-gradient(-45deg, #f8f9fa 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #f8f9fa 75%), linear-gradient(-45deg, transparent 75%, #f8f9fa 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-color);
+    border: 2px dashed #dee2e6;
+}
+
+/* Student Progress */
+.student-item {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+    .student-item:hover {
+        border-color: var(--primary-color);
+        box-shadow: var(--shadow-sm);
+    }
+
+.progress-custom {
+    height: 8px;
+    border-radius: 4px;
+}
+
+/* Events */
+.event-item {
+    border-left: 4px solid;
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+    .event-item:hover {
+        transform: translateX(5px);
+        box-shadow: var(--shadow);
+    }
+
+    .event-item.danger {
+        border-left-color: var(--danger-color);
+    }
+
+    .event-item.info {
+        border-left-color: var(--info-color);
+    }
+
+    .event-item.warning {
+        border-left-color: var(--warning-color);
+    }
+
+/* Lesson Cards */
+.lesson-card {
+    background: white;
+    border-radius: 1rem;
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+    .lesson-card:hover {
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow);
+    }
+
+.lesson-header {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Table Styles */
+.modern-table {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.table thead th {
+    background: var(--light-bg);
+    border: none;
+    font-weight: 600;
+    color: var(--dark-bg);
+}
+
+.table tbody tr {
+    transition: all 0.3s ease;
+}
+
+    .table tbody tr:hover {
+        background: rgba(61, 94, 225, 0.05);
+    }
+
+/* Leave Status */
+.leave-item {
+    background: var(--light-bg);
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+    .leave-item:hover {
+        background: white;
+        box-shadow: var(--shadow-sm);
+    }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 1rem;
+    }
+
+    .dashboard-header {
+        margin-bottom: 1.5rem;
+    }
+
+        .dashboard-header h1 {
+            font-size: 1.75rem;
+        }
+
+    .profile-avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    .modern-card {
+        margin-bottom: 1rem;
+    }
+
+    .progress-circle {
+        width: 100px;
+        height: 100px;
+    }
+
+        .progress-circle::before {
+            width: 70px;
+            height: 70px;
+        }
+
+    .class-item {
+        margin-bottom: 0.75rem;
+    }
+
+    .table-responsive {
+        border-radius: 0.75rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .dashboard-header .row {
+        text-align: center;
+    }
+
+    .dashboard-header .col-md-6:last-child {
+        margin-top: 1rem;
+    }
+
+    .btn-sm {
+        font-size: 0.75rem;
+        padding: 0.375rem 0.75rem;
+    }
+
+    .student-item,
+    .leave-item,
+    .event-item {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+    .animate-card:nth-child(2) {
+        animation-delay: 0.1s;
+    }
+
+    .animate-card:nth-child(3) {
+        animation-delay: 0.2s;
+    }
+
+    .animate-card:nth-child(4) {
+        animation-delay: 0.3s;
+    }
+
+/* Custom Scrollbar */
+.scrollable {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+    .scrollable::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .scrollable::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 2px;
+    }
+
+    .scrollable::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 2px;
+    }
+
+        .scrollable::-webkit-scrollbar-thumb:hover {
+            background: #2c4fd6;
+        }
+

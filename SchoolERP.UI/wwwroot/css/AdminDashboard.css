@@ -1,0 +1,135 @@
+﻿
+:root {
+    --primary-color: #3d5ee1;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --light-bg: #f8f9fa;
+    --shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+body {
+    background-color: var(--light-bg);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard-header {
+    background: linear-gradient(135deg, var(--primary-color), #2c4fd6);
+    color: white;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+}
+
+    .stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+
+.stat-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.management-card {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+    .management-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15);
+    }
+
+    .management-card .card-body {
+        padding: 1.5rem;
+    }
+
+.btn-custom {
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.alert-notification {
+    border-left: 4px solid var(--success-color);
+    border-radius: 0.5rem;
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+.quick-stats {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.progress-custom {
+    height: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .dashboard-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .stat-card .card-body {
+        padding: 1rem;
+    }
+
+    .management-card .card-body {
+        padding: 1.25rem;
+    }
+
+    .btn-custom {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container-fluid {
+        padding: 0.75rem;
+    }
+
+    .dashboard-header {
+        margin-bottom: 1rem;
+    }
+
+    .quick-stats {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+.chart-placeholder {
+    background: linear-gradient(45deg, #f8f9fa 25%, transparent 25%), linear-gradient(-45deg, #f8f9fa 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #f8f9fa 75%), linear-gradient(-45deg, transparent 75%, #f8f9fa 75%);
+    background-size: 10px 10px;
+    background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
+    height: 100px;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    border: 2px dashed #dee2e6;
+}

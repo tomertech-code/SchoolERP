@@ -1,78 +1,431 @@
-﻿@model SchoolERP.Data.Entities.Student
+﻿```html
+@model SchoolERP.Data.Entities.Student
 
 @{
-    ViewData["Title"] = "StudentDetails";
+    ViewData["Title"] = "Student Details";
 }
 
-<h1>StudentDetails</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="~/css/studentdetails.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <!-- Page Header -->
+        <div class="row mb-4 align-items-center justify-content-between">
+            <div class="col-md-6">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-1">
+                        <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-primary">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-primary">Student</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Student Details</li>
+                    </ol>
+                </nav>
+                <h3 class="mb-0">Student Details</h3>
+            </div>
+            <div class="col-md-6 d-flex justify-content-md-end justify-content-start mt-3 mt-md-0 gap-2">
+                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#login_detail">
+                    <i class="bi bi-lock me-1"></i> Login Details
+                </button>
+                <a asp-action="EditStudent" asp-route-id="@Model?.StudentId" class="btn btn-primary">
+                    <i class="bi bi-pencil-square me-1"></i> Edit Student
+                </a>
+            </div>
+        </div>
 
-<div>
-    <h4>Student</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AdmissionNo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AdmissionNo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Dob)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Dob)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClassId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ClassId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SectionId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SectionId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EnrollmentDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EnrollmentDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.User.PasswordHash)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.StudentId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+        <div class="row g-4">
+            <!-- Student Information -->
+            <div class="col-xxl-3 col-xl-4">
+                <div class="sticky-top" style="top: 20px;">
+                    <!-- Profile Card -->
+                    <div class="card profile-card mb-4">
+                        <div class="card-body text-center">
+                           @*  <img src="@(Model?.ProfileImageUrl ?? "https://via.placeholder.com/120x120")" alt="Student" class="avatar avatar-xxl mb-3">
+                            <span class="badge bg-success mb-2">@(Model?.Status ?? "Active")</span> *@
+                            <h5 class="mb-1">@Model?.FirstName @Model?.LastName</h5>
+                            <p class="text-light">@Model?.AdmissionNo</p>
+                            <button class="btn btn-light btn-sm w-100 mt-3" data-bs-toggle="modal" data-bs-target="#add_fees_collect">Add Fees</button>
+                        </div>
+                    </div>
+                    <!-- Basic Information -->
+                    <div class="card info-section">
+                        <div class="card-body">
+                            <h5>Basic Information</h5>
+                            <dl class="row mb-0">
+                                <dt class="col-6 fw-medium mb-2">Roll No</dt>
+                                <dd class="col-6 mb-2">@Model?.AdmissionNo</dd>
+                                <dt class="col-6 fw-medium mb-2">Gender</dt>
+                                <dd class="col-6 mb-2">@Model?.Gender</dd>
+                                <dt class="col-6 fw-medium mb-2">Date of Birth</dt>
+                                <dd class="col-6 mb-2">@Model?.EnrollmentDate</dd>
+                                <dt class="col-6 fw-medium mb-2">Blood Group</dt>
+                                <dd class="col-6 mb-2">@Model?.FeePayments</dd>
+                                <dt class="col-6 fw-medium mb-2">Favorite Color</dt>
+                                <dd class="col-6 mb-2">@Model?.Address</dd>
+                                <dt class="col-6 fw-medium mb-2">Religion</dt>
+                                <dd class="col-6 mb-2">Muslim</dd>
+                                <dt class="col-6 fw-medium mb-2">Caste</dt>
+                                <dd class="col-6 mb-2">Rangad</dd>
+                                <dt class="col-6 fw-medium mb-2">Category</dt>
+                                <dd class="col-6 mb-2">Student</dd>
+                                <dt class="col-6 fw-medium mb-2">Mother Tongue</dt>
+                                <dd class="col-6 mb-2">Hindi</dd>
+                                @* <dt class="col-6 fw-medium mb-2">Languages</dt> *@
+                                @* <dd class="col-6 mb-2">
+                                    @if (Model?.Languages != null && Model.Languages.Any())
+                                    {
+                                        foreach (var language in Model.Languages)
+                                        {
+                                            <span class="badge bg-light text-dark me-1">@language</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">None</span>
+                                    }
+                                </dd> *@
+                            </dl>
+                        </div>
+                    </div>
+                    <!-- Primary Contact Info -->
+                    <div class="card info-section">
+                        <div class="card-body">
+                            <h5>Primary Contact Info</h5>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-telephone-fill fs-5 text-primary me-2"></i>
+                                <div>
+                                    <p class="fw-medium mb-1">Phone Number</p>
+                                    <p>7982542794</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-envelope-fill fs-5 text-primary me-2"></i>
+                                <div>
+                                    <p class="fw-medium mb-1">Email Address</p>
+                                    <p>Arbaztomer2@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sibling Information -->
+                    <div class="card info-section">
+                        <div class="card-body">
+                            <h5>Sibling Information</h5>
+                           @*  @if (Model?.Siblings != null && Model.Siblings.Any())
+                            {
+                                foreach (var sibling in Model.Siblings)
+                                {
+                                    <div class="d-flex align-items-center bg-light p-3 rounded mb-3">
+                                        <img src="@(sibling.ProfileImageUrl ?? "https://via.placeholder.com/60x60")" alt="Sibling" class="avatar avatar-lg rounded me-2">
+                                        <div>
+                                            <h6 class="mb-1">@sibling.Name</h6>
+                                            <p>@sibling.Class, @sibling.Section</p>
+                                        </div>
+                                    </div>
+                                }
+                            } *@
+                            else
+                            {
+                                <p class="text-muted">No sibling information available.</p>
+                            }
+                        </div>
+                    </div>
+                    <!-- Hostel & Transportation -->
+                    <div class="card info-section">
+                        <div class="card-body">
+                            <ul class="nav nav-tabs nav-tabs-bottom mb-3">
+                                <li class="nav-item"><a class="nav-link active" href="#hostel" data-bs-toggle="tab">Hostel</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#transport" data-bs-toggle="tab">Transportation</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="hostel">
+                                  @*   @if (Model?.Hostel != null)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-building fs-5 text-primary me-2"></i>
+                                            <div>
+                                                <h6 class="mb-1">@Model.Hostel.Name</h6>
+                                                <p class="text-primary">Room No: @Model.Hostel.RoomNumber</p>
+                                            </div>
+                                        </div>
+                                    }
+                                    else *@
+                                    {
+                                        <p class="text-muted">No hostel information available.</p>
+                                    }
+                                </div>
+@*                                 <div class="tab-pane fade" id="transport">
+                                    @if (Model?.Transportation != null)
+                                    {
+                                        <div class="d-flex align-items-center mb-3">
+                                            <i class="bi bi-bus-front fs-5 text-primary me-2"></i>
+                                            <div>
+                                                <p class="fw-medium mb-1">Route</p>
+                                                <p>@Model.Transportation.Route</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <p class="fw-medium mb-1">Bus Number</p>
+                                                <p>@Model.Transportation.BusNumber</p>
+                                            </div>
+                                            <div class="col-6">
+                                                <p class="fw-medium mb-1">Pickup Point</p>
+                                                <p>@Model.Transportation.PickupPoint</p>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-muted">No transportation information available.</p>
+                                    }
+                                </div> *@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-xxl-9 col-xl-8">
+                <!-- Navigation Tabs -->
+                <ul class="nav nav-tabs nav-tabs-bottom mb-4">
+                    <li class="nav-item"><a href="#" class="nav-link active"><i class="bi bi-person-circle me-1"></i> Student Details</a></li>
+                    <li class="nav-item"><a  asp-controller="Timetable" asp-action="StudentTimeTable" class="nav-link"><i class="bi bi-table me-1"></i> Time Table</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-calendar-check me-1"></i> Leave & Attendance</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-wallet2 me-1"></i> Fees</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-award me-1"></i> Exam & Results</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-book me-1"></i> Library</a></li>
+                </ul>
+
+                <!-- Parents Information -->
+                <div class="card info-section">
+                    <div class="card-body">
+                        <h5>Parents Information</h5>
+                        <div class="row g-3">
+                           @*  @if (Model?.Parents != null && Model.Parents.Any())
+                            {
+                                foreach (var parent in Model.Parents)
+                                {
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="d-flex align-items-center">
+                                            <img src="@(parent.ProfileImageUrl ?? "https://via.placeholder.com/60x60")" alt="Parent" class="avatar avatar-lg rounded me-2">
+                                            <div>
+                                                <h6>@parent.Name</h6>
+                                                <p class="text-primary">@parent.Relationship</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-6">
+                                        <p class="fw-medium mb-1">Phone</p>
+                                        <p>@parent.PhoneNumber</p>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-6 d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <p class="fw-medium mb-1">Email</p>
+                                            <p>@parent.Email</p>
+                                        </div>
+                                        <button class="btn btn-outline-dark btn-sm" data-bs-toggle="tooltip" title="Reset Password">
+                                            <i class="bi bi-lock-fill"></i>
+                                        </button>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p class="text-muted">No parent information available.</p>
+                            }
+  *@                       </div>
+                    </div>
+                </div>
+
+                <!-- Documents -->
+                <div class="row g-3">
+                    <div class="col-xxl-6">
+                        <div class="card info-section">
+                            <div class="card-body">
+                                <h5>Documents</h5>
+                               @*  @if (Model?.Documents != null && Model.Documents.Any())
+                                {
+                                    foreach (var document in Model.Documents)
+                                    {
+                                        <div class="d-flex align-items-center justify-content-between mb-3 p-2 bg-light rounded">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-file-earmark-pdf fs-5 text-danger me-2"></i>
+                                                <p class="fw-medium mb-0">@document.FileName</p>
+                                            </div>
+                                            <a href="@document.FileUrl" class="btn btn-outline-primary btn-sm"><i class="bi bi-download"></i></a>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <p class="text-muted">No documents available.</p>
+                                }*@
+                            </div> 
+                        </div>
+                    </div>
+                    <!-- Address -->
+                    <div class="col-xxl-6">
+                        <div class="card info-section">
+                            <div class="card-body">
+                                <h5>Address</h5>
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="bi bi-geo-alt-fill fs-5 text-primary me-2"></i>
+                                    <div>
+                                        <p class="fw-medium mb-1">Current Address</p>
+                                        <p>@Model?.Address</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-geo-alt fs-5 text-primary me-2"></i>
+                                    <div>
+                                        <p class="fw-medium mb-1">Permanent Address</p>
+                                        <p>@(Model?.Address ?? Model?.Address)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Previous School Details -->
+                <div class="card info-section">
+                    <div class="card-body">
+                        <h5>Previous School Details</h5>
+                        @* @if (Model?.PreviousSchool != null)
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="fw-medium mb-1">Previous School Name</p>
+                                    <p>@Model.PreviousSchool.Name</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="fw-medium mb-1">School Address</p>
+                                    <p>@Model.PreviousSchool.Address</p>
+                                </div>
+                            </div>
+                        } *@
+                        else
+                        {
+                            <p class="text-muted">No previous school information available.</p>
+                        }
+                    </div>
+                </div>
+
+                <!-- Bank Details & Medical History -->
+                <div class="row g-3">
+                    <div class="col-xxl-6">
+                        <div class="card info-section">
+                            <div class="card-body">
+                                <h5>Bank Details</h5>
+                               @*  @if (Model?.BankDetails != null)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="fw-medium mb-1">Bank Name</p>
+                                            <p>@Model.BankDetails.BankName</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p class="fw-medium mb-1">Branch</p>
+                                            <p>@Model.BankDetails.Branch</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p class="fw-medium mb-1">IFSC</p>
+                                            <p>@Model.BankDetails.IFSC</p>
+                                        </div>
+                                    </div>
+                                } *@
+                                else
+                                {
+                                    <p class="text-muted">No bank details available.</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6">
+                        <div class="card info-section">
+                            <div class="card-body">
+                                <h5>Medical History</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p class="fw-medium mb-1">Known Allergies</p>
+                                     @*    @if (Model?.Allergies != null && Model.Allergies.Any())
+                                        {
+                                            foreach (var allergy in Model.Allergies)
+                                            {
+                                                <span class="badge bg-light text-dark">@allergy</span>
+                                            }
+                                        } *@
+                                        else
+                                        {
+                                            <span class="text-muted">None</span>
+                                        }
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="fw-medium mb-1">Medications</p>
+                                        <p>No Medication</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Info -->
+                <div class="card info-section">
+                    <div class="card-body">
+                        <h5>Other Info</h5>
+                        <p>@(Model?.Address ?? "Additional information may be collected based on organizational needs, ensuring compliance with privacy regulations.")</p>
+                    </div>
+                </div>
+
+                <!-- Additional Model Data -->
+                <div class="card info-section">
+                    <div class="card-body">
+                        <h5>Additional Details</h5>
+                        <dl class="row">
+                            <dt class="col-sm-2">Admission No</dt>
+                            <dd class="col-sm-10">@Html.DisplayFor(model => model.AdmissionNo)</dd>
+                            <dt class="col-sm-2">Full Name</dt>
+                            <dd class="col-sm-10">@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</dd>
+                            <dt class="col-sm-2">Date of Birth</dt>
+                            <dd class="col-sm-10">@Html.DisplayFor(model => model.Dob)</dd>
+                            <dt class="col-sm-2">Gender</dt>
+                            <dd class="col-sm-10">@Html.DisplayFor(model => model.Gender)</dd>
+                            <dt class="col-sm-2">Class</dt>
+                            <dd class="col-sm-10">@Html.DisplayFor(model => model.ClassId)</dd>
+                            <dt class="col-sm-2">Section</dt>
+                            <dd class="col-sm-10">@Html.DisplayFor(model => model.SectionId)</dd>
+                            <dt class="col-sm-2">Address</dt>
+                            <dd class="col-sm-10">@Html.DisplayFor(model => model.Address)</dd>
+                            <dt class="col-sm-2">Enrollment Date</dt>
+                            <dd class="col-sm-10">@Html.DisplayFor(model => model.EnrollmentDate)</dd>
+                            <dt class="col-sm-2">User</dt>
+                            <dd class="col-sm-10">@Html.DisplayFor(model => model.User.PasswordHash)</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.StudentId">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        // Initialize tooltips
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    </script>
+</body>
+</html>
+```

@@ -1,27 +1,798 @@
 ﻿@{
     ViewData["Title"] = "Teacher Dashboard";
 }
+@{
+    ViewData["Title"] = "Teacher Dashboard";
+}
 
-<div class="container mt-4">
-    <h2 class="text-success">Welcome, Teacher</h2>
-    <div class="row mt-4">
-        <div class="col-md-4">
-            <div class="card shadow-sm p-3">
-                <h5>Assignments</h5>
-                <a href="/Assignments/Index" class="btn btn-success btn-sm mt-2">Go</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/css/teacherdashbord.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <!-- Page Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Teacher Dashboard</li>
+                    </ol>
+                </nav>
+                <h3 class="mt-2 mb-0">Teacher Dashboard</h3>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm p-3">
-                <h5>Exams</h5>
-                <a href="/Exams/Index" class="btn btn-info btn-sm mt-2">Go</a>
+
+        <!-- Greeting Section -->
+        <div class="dashboard-header p-4 mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="mb-2">Good Morning, Ms. Teena</h1>
+                    <p class="mb-3 opacity-75">Have a great day at work!</p>
+                    <div class="notice-alert p-3 rounded">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-info-circle me-2"></i>
+                            <span><strong>Notice:</strong> Staff meeting at 9 AM today. Don't forget to attend!</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-md-end text-center">
+                    <div class="d-flex gap-2 justify-content-md-end justify-content-center mt-3 mt-md-0">
+                        <button class="btn btn-light btn-sm">
+                            <i class="bi bi-calendar-event me-1"></i>Schedule
+                        </button>
+                        <button class="btn btn-outline-light btn-sm">
+                            <i class="bi bi-bell me-1"></i>Alerts
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm p-3">
-                <h5>Timetable</h5>
-                <a href="/Timetables/Index" class="btn btn-primary btn-sm mt-2">Go</a>
+
+        <!-- Profile and Syllabus Row -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-8">
+                <!-- Teacher Profile -->
+                <div class="profile-card text-white p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <div class="d-flex align-items-center">
+                                <img src="https://via.placeholder.com/80x80" alt="Teacher" class="profile-avatar me-3">
+                                <div>
+                                    <span class="teacher-badge badge mb-2">#T594651</span>
+                                    <h3 class="mb-1">Henriques Morgan</h3>
+                                    <div class="d-flex align-items-center text-light">
+                                        <span class="me-3">Classes: I-A, V-B</span>
+                                        <span class="d-flex align-items-center">
+                                            <i class="bi bi-circle-fill text-warning me-1"></i>Physics
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <button class="btn btn-primary">
+                                <i class="bi bi-pencil me-1"></i>Edit Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <!-- Syllabus Progress -->
+                <div class="modern-card p-4 text-center">
+                    <h5 class="mb-4">Syllabus Progress</h5>
+                    <div class="progress-ring mb-4">
+                        <div class="progress-circle">
+                            <span class="progress-text">95%</span>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <div class="d-flex align-items-center justify-content-center mb-1">
+                                <i class="bi bi-circle-fill text-success me-2"></i>
+                                <span>Completed</span>
+                            </div>
+                            <strong class="text-success">95%</strong>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center justify-content-center mb-1">
+                                <i class="bi bi-circle-fill text-danger me-2"></i>
+                                <span>Pending</span>
+                            </div>
+                            <strong class="text-danger">5%</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Today's Classes -->
+        <div class="modern-card mb-4">
+            <div class="card-header bg-transparent border-0 p-4">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <h5 class="mb-0">Today's Classes</h5>
+                    <input type="date" class="form-control form-control-sm" style="max-width: 150px;">
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="class-item completed p-3">
+                            <span class="badge bg-danger mb-2">
+                                <i class="bi bi-clock me-1"></i>09:00 - 09:45
+                            </span>
+                            <p class="mb-0 text-dark fw-medium">Class V, B</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="class-item completed p-3">
+                            <span class="badge bg-danger mb-2">
+                                <i class="bi bi-clock me-1"></i>09:00 - 09:45
+                            </span>
+                            <p class="mb-0 text-dark fw-medium">Class IV, C</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="class-item p-3">
+                            <span class="badge bg-primary mb-2">
+                                <i class="bi bi-clock me-1"></i>11:30 - 12:15
+                            </span>
+                            <p class="mb-0 text-dark fw-medium">Class V, B</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="class-item p-3">
+                            <span class="badge bg-primary mb-2">
+                                <i class="bi bi-clock me-1"></i>01:30 - 02:15
+                            </span>
+                            <p class="mb-0 text-dark fw-medium">Class V, B</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Row -->
+        <div class="row g-4 mb-4">
+            <!-- Schedules and Attendance -->
+            <div class="col-lg-6">
+                <div class="modern-card">
+                    <div class="card-header bg-transparent border-0 p-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Schedules & Attendance</h5>
+                            <button class="btn btn-primary btn-sm">
+                                <i class="bi bi-plus me-1"></i>Add New
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body scrollable">
+                        <!-- Mini Calendar -->
+                        <div class="bg-light rounded p-3 mb-4">
+                            <div class="text-center">
+                                <h6 class="mb-3">September 2025</h6>
+                                <div class="row g-1 small">
+                                    <div class="col text-center fw-bold">S</div>
+                                    <div class="col text-center fw-bold">M</div>
+                                    <div class="col text-center fw-bold">T</div>
+                                    <div class="col text-center fw-bold">W</div>
+                                    <div class="col text-center fw-bold">T</div>
+                                    <div class="col text-center fw-bold">F</div>
+                                    <div class="col text-center fw-bold">S</div>
+                                </div>
+                                <div class="row g-1 small mt-1">
+                                    <div class="col text-center p-1">1</div>
+                                    <div class="col text-center p-1">2</div>
+                                    <div class="col text-center p-1">3</div>
+                                    <div class="col text-center p-1">4</div>
+                                    <div class="col text-center p-1">5</div>
+                                    <div class="col text-center p-1">6</div>
+                                    <div class="col text-center p-1">7</div>
+                                </div>
+                                <div class="row g-1 small">
+                                    <div class="col text-center p-1">8</div>
+                                    <div class="col text-center p-1">9</div>
+                                    <div class="col text-center p-1">10</div>
+                                    <div class="col text-center p-1">11</div>
+                                    <div class="col text-center p-1">12</div>
+                                    <div class="col text-center p-1">13</div>
+                                    <div class="col text-center p-1">14</div>
+                                </div>
+                                <div class="row g-1 small">
+                                    <div class="col text-center p-1">15</div>
+                                    <div class="col text-center p-1">16</div>
+                                    <div class="col text-center p-1">17</div>
+                                    <div class="col text-center p-1">18</div>
+                                    <div class="col text-center p-1">19</div>
+                                    <div class="col text-center p-1">20</div>
+                                    <div class="col text-center p-1">21</div>
+                                </div>
+                                <div class="row g-1 small">
+                                    <div class="col text-center p-1">22</div>
+                                    <div class="col text-center p-1">23</div>
+                                    <div class="col text-center p-1">24</div>
+                                    <div class="col text-center p-1">25</div>
+                                    <div class="col text-center p-1">26</div>
+                                    <div class="col text-center p-1">27</div>
+                                    <div class="col text-center p-1 bg-primary text-white rounded">28</div>
+                                </div>
+                                <div class="row g-1 small">
+                                    <div class="col text-center p-1">29</div>
+                                    <div class="col text-center p-1">30</div>
+                                    <div class="col"></div>
+                                    <div class="col"></div>
+                                    <div class="col"></div>
+                                    <div class="col"></div>
+                                    <div class="col"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Attendance -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h6 class="mb-0">Attendance (Last 7 Days)</h6>
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                                        <i class="bi bi-calendar me-1"></i>This Week
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">This Week</a></li>
+                                        <li><a class="dropdown-item" href="#">Last Week</a></li>
+                                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="bg-light rounded p-3 mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h6 class="mb-0">Last 7 Days</h6>
+                                    <small class="text-muted">22 Sep 2025 - 28 Sep 2025</small>
+                                </div>
+                                <div class="d-flex gap-1">
+                                    <span class="badge bg-success">M</span>
+                                    <span class="badge bg-success">T</span>
+                                    <span class="badge bg-success">W</span>
+                                    <span class="badge bg-success">T</span>
+                                    <span class="badge bg-danger">F</span>
+                                    <span class="badge bg-light text-dark">S</span>
+                                    <span class="badge bg-light text-muted">S</span>
+                                </div>
+                            </div>
+                            <p class="mb-3">
+                                <i class="bi bi-calendar-heart text-primary me-2"></i>
+                                Total working days: <strong>28 Days</strong>
+                            </p>
+                            <div class="row text-center mb-4">
+                                <div class="col-3">
+                                    <div class="border-end">
+                                        <p class="mb-1 small">Present</p>
+                                        <h5 class="text-success mb-0">25</h5>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="border-end">
+                                        <p class="mb-1 small">Absent</p>
+                                        <h5 class="text-danger mb-0">2</h5>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="border-end">
+                                        <p class="mb-1 small">Half Day</p>
+                                        <h5 class="text-warning mb-0">0</h5>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <p class="mb-1 small">Late</p>
+                                    <h5 class="text-info mb-0">1</h5>
+                                </div>
+                            </div>
+                            <div class="attendance-chart text-center text-muted">
+                                Attendance Chart Visualization
+                            </div>
+                        </div>
+
+                        <!-- Upcoming Events -->
+                        <h6 class="mb-3">Upcoming Events</h6>
+                        <div class="event-item danger p-3 mb-3">
+                            <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
+                                <div class="bg-danger bg-opacity-10 text-danger rounded p-2 me-3">
+                                    <i class="bi bi-calendar-event"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">Vacation Meeting</h6>
+                                    <p class="mb-0 small text-muted">
+                                        <i class="bi bi-calendar me-1"></i>07 Oct 2025
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="mb-0 small">
+                                    <i class="bi bi-clock me-1"></i>09:10 AM - 10:50 AM
+                                </p>
+                                <div class="d-flex">
+                                    <img src="https://via.placeholder.com/24x24" class="rounded-circle me-1" width="24" height="24">
+                                    <img src="https://via.placeholder.com/24x24" class="rounded-circle" width="24" height="24">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-item info p-3">
+                            <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
+                                <div class="bg-info bg-opacity-10 text-info rounded p-2 me-3">
+                                    <i class="bi bi-people"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">Parent-Teacher Meeting</h6>
+                                    <p class="mb-0 small text-muted">
+                                        <i class="bi bi-calendar me-1"></i>15 Oct 2025
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="mb-0 small">
+                                    <i class="bi bi-clock me-1"></i>09:10 AM - 10:50 AM
+                                </p>
+                                <div class="d-flex">
+                                    <img src="https://via.placeholder.com/24x24" class="rounded-circle me-1" width="24" height="24">
+                                    <img src="https://via.placeholder.com/24x24" class="rounded-circle me-1" width="24" height="24">
+                                    <img src="https://via.placeholder.com/24x24" class="rounded-circle" width="24" height="24">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson Plans -->
+            <div class="col-lg-6">
+                <div class="modern-card">
+                    <div class="card-header bg-transparent border-0 p-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Lesson Plans</h5>
+                            <a href="#" class="text-decoration-none">View All</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-lg-6">
+                                <div class="lesson-card p-3">
+                                    <div class="lesson-header bg-success bg-opacity-10 text-success">Class V, B</div>
+                                    <h6 class="mb-3">Introduction to Physics in Technology</h6>
+                                    <div class="progress progress-custom mb-3">
+                                        <div class="progress-bar bg-success" style="width: 80%"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <button class="btn btn-outline-primary btn-sm">
+                                            <i class="bi bi-pencil me-1"></i>Reschedule
+                                        </button>
+                                        <button class="btn btn-primary btn-sm">
+                                            <i class="bi bi-share me-1"></i>Share
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="lesson-card p-3">
+                                    <div class="lesson-header bg-warning bg-opacity-10 text-warning">Class V, A</div>
+                                    <h6 class="mb-3">Biometrics & Their Functionality</h6>
+                                    <div class="progress progress-custom mb-3">
+                                        <div class="progress-bar bg-warning" style="width: 80%"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <button class="btn btn-outline-primary btn-sm">
+                                            <i class="bi bi-pencil me-1"></i>Reschedule
+                                        </button>
+                                        <button class="btn btn-primary btn-sm">
+                                            <i class="bi bi-share me-1"></i>Share
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="lesson-card p-3">
+                                    <div class="lesson-header bg-info bg-opacity-10 text-info">Class IV, C</div>
+                                    <h6 class="mb-3">Analyzing Literary Texts</h6>
+                                    <div class="progress progress-custom mb-3">
+                                        <div class="progress-bar bg-info" style="width: 80%"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <button class="btn btn-outline-primary btn-sm">
+                                            <i class="bi bi-pencil me-1"></i>Reschedule
+                                        </button>
+                                        <button class="btn btn-primary btn-sm">
+                                            <i class="bi bi-share me-1"></i>Share
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="lesson-card p-3">
+                                    <div class="lesson-header bg-danger bg-opacity-10 text-danger">Class V, A</div>
+                                    <h6 class="mb-3">Enhancing Vocabulary and Grammar</h6>
+                                    <div class="progress progress-custom mb-3">
+                                        <div class="progress-bar bg-danger" style="width: 30%"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <button class="btn btn-outline-primary btn-sm">
+                                            <i class="bi bi-pencil me-1"></i>Reschedule
+                                        </button>
+                                        <button class="btn btn-primary btn-sm">
+                                            <i class="bi bi-share me-1"></i>Share
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Row - Student Marks and Leave Status -->
+        <div class="row g-4">
+            <!-- Student Marks Table -->
+            <div class="col-lg-8">
+                <div class="modern-card">
+                    <div class="card-header bg-transparent border-0 p-4">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                            <h5 class="mb-0">Student Marks</h5>
+                            <div class="d-flex gap-2">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                                        <i class="bi bi-funnel me-1"></i>All Classes
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Class I</a></li>
+                                        <li><a class="dropdown-item" href="#">Class II</a></li>
+                                        <li><a class="dropdown-item" href="#">Class III</a></li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                                        <i class="bi bi-funnel me-1"></i>All Sections
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Section A</a></li>
+                                        <li><a class="dropdown-item" href="#">Section B</a></li>
+                                        <li><a class="dropdown-item" href="#">Section C</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Class</th>
+                                        <th>Section</th>
+                                        <th>Marks %</th>
+                                        <th>CGPA</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>35013</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/32x32" class="rounded-circle me-2" width="32" height="32">
+                                                <span>Janet</span>
+                                            </div>
+                                        </td>
+                                        <td>III</td>
+                                        <td>A</td>
+                                        <td>89%</td>
+                                        <td>4.2</td>
+                                        <td><span class="badge bg-success">Pass</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>35012</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/32x32" class="rounded-circle me-2" width="32" height="32">
+                                                <span>Joann</span>
+                                            </div>
+                                        </td>
+                                        <td>IV</td>
+                                        <td>B</td>
+                                        <td>88%</td>
+                                        <td>3.2</td>
+                                        <td><span class="badge bg-success">Pass</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>35011</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/32x32" class="rounded-circle me-2" width="32" height="32">
+                                                <span>Kathleen</span>
+                                            </div>
+                                        </td>
+                                        <td>II</td>
+                                        <td>A</td>
+                                        <td>69%</td>
+                                        <td>4.5</td>
+                                        <td><span class="badge bg-success">Pass</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>35010</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/32x32" class="rounded-circle me-2" width="32" height="32">
+                                                <span>Gifford</span>
+                                            </div>
+                                        </td>
+                                        <td>I</td>
+                                        <td>B</td>
+                                        <td>21%</td>
+                                        <td>4.5</td>
+                                        <td><span class="badge bg-danger">Fail</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>35009</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/32x32" class="rounded-circle me-2" width="32" height="32">
+                                                <span>Lisa</span>
+                                            </div>
+                                        </td>
+                                        <td>II</td>
+                                        <td>B</td>
+                                        <td>31%</td>
+                                        <td>3.9</td>
+                                        <td><span class="badge bg-danger">Fail</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leave Status -->
+            <div class="col-lg-4">
+                <div class="modern-card">
+                    <div class="card-header bg-transparent border-0 p-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Leave Status</h5>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                                    <i class="bi bi-calendar me-1"></i>This Month
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" href="#">Last Week</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body scrollable">
+                        <div class="leave-item p-3 mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-danger bg-opacity-10 text-danger rounded p-2 me-3">
+                                        <i class="bi bi-exclamation-triangle"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0">Emergency Leave</h6>
+                                        <small class="text-muted">Date: 15 Sep 2025</small>
+                                    </div>
+                                </div>
+                                <span class="badge bg-warning">
+                                    <i class="bi bi-clock me-1"></i>Pending
+                                </span>
+                            </div>
+                        </div>
+                        <div class="leave-item p-3 mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-info bg-opacity-10 text-info rounded p-2 me-3">
+                                        <i class="bi bi-heart-pulse"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0">Medical Leave</h6>
+                                        <small class="text-muted">Date: 15 Sep 2025</small>
+                                    </div>
+                                </div>
+                                <span class="badge bg-success">
+                                    <i class="bi bi-check-circle me-1"></i>Approved
+                                </span>
+                            </div>
+                        </div>
+                        <div class="leave-item p-3 mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-info bg-opacity-10 text-info rounded p-2 me-3">
+                                        <i class="bi bi-heart-pulse"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0">Medical Leave</h6>
+                                        <small class="text-muted">Date: 16 Sep 2025</small>
+                                    </div>
+                                </div>
+                                <span class="badge bg-danger">
+                                    <i class="bi bi-x-circle me-1"></i>Declined
+                                </span>
+                            </div>
+                        </div>
+                        <div class="leave-item p-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-warning bg-opacity-10 text-warning rounded p-2 me-3">
+                                        <i class="bi bi-thermometer-half"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0">Sick Leave</h6>
+                                        <small class="text-muted">Date: 16 Sep 2025</small>
+                                    </div>
+                                </div>
+                                <span class="badge bg-success">
+                                    <i class="bi bi-check-circle me-1"></i>Approved
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Best Performers and Student Progress -->
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="modern-card">
+                    <div class="card-header bg-transparent border-0 p-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Best Performers</h5>
+                            <a href="#" class="text-decoration-none">View All</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0">Class IV, C</h6>
+                                <span class="badge bg-primary">80%</span>
+                            </div>
+                            <div class="progress progress-custom">
+                                <div class="progress-bar bg-primary" style="width: 80%"></div>
+                            </div>
+                            <div class="d-flex gap-1 mt-2">
+                                <img src="https://via.placeholder.com/24x24" class="rounded-circle" width="24" height="24">
+                                <img src="https://via.placeholder.com/24x24" class="rounded-circle" width="24" height="24">
+                                <img src="https://via.placeholder.com/24x24" class="rounded-circle" width="24" height="24">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0">Class III, B</h6>
+                                <span class="badge bg-warning text-dark">54%</span>
+                            </div>
+                            <div class="progress progress-custom">
+                                <div class="progress-bar bg-warning" style="width: 54%"></div>
+                            </div>
+                            <div class="d-flex gap-1 mt-2">
+                                <img src="https://via.placeholder.com/24x24" class="rounded-circle" width="24" height="24">
+                                <img src="https://via.placeholder.com/24x24" class="rounded-circle" width="24" height="24">
+                                <img src="https://via.placeholder.com/24x24" class="rounded-circle" width="24" height="24">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0">Class V, A</h6>
+                                <span class="badge bg-info">76%</span>
+                            </div>
+                            <div class="progress progress-custom">
+                                <div class="progress-bar bg-info" style="width: 76%"></div>
+                            </div>
+                            <div class="d-flex gap-1 mt-2">
+                                <img src="https://via.placeholder.com/24x24" class="rounded-circle" width="24" height="24">
+                                <img src="https://via.placeholder.com/24x24" class="rounded-circle" width="24" height="24">
+                                <img src="https://via.placeholder.com/24x24" class="rounded-circle" width="24" height="24">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="modern-card">
+                    <div class="card-header bg-transparent border-0 p-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Student Progress</h5>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                                    <i class="bi bi-calendar me-1"></i>This Month
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" href="#">Last Week</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="student-item p-3 mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://via.placeholder.com/48x48" class="rounded me-3" width="48" height="48">
+                                    <div>
+                                        <h6 class="mb-0">Susan Boswell</h6>
+                                        <small class="text-muted">III, B</small>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-award text-warning me-2"></i>
+                                    <span class="badge bg-success">98%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="student-item p-3 mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://via.placeholder.com/48x48" class="rounded me-3" width="48" height="48">
+                                    <div>
+                                        <h6 class="mb-0">Richard Mayes</h6>
+                                        <small class="text-muted">V, A</small>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-award-fill text-warning me-2"></i>
+                                    <span class="badge bg-success">98%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="student-item p-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://via.placeholder.com/48x48" class="rounded me-3" width="48" height="48">
+                                    <div>
+                                        <h6 class="mb-0">Veronica Randle</h6>
+                                        <small class="text-muted">V, B</small>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <span class="badge bg-info">78%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <div class="container mt-4">
+        <h2 class="text-success">Welcome, Teacher</h2>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3">
+                    <h5>Assignments</h5>
+                    <a href="/Assignments/Index" class="btn btn-success btn-sm mt-2">Go</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3">
+                    <h5>Exams</h5>
+                    <a href="/Exams/Index" class="btn btn-info btn-sm mt-2">Go</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3">
+                    <h5>Timetable</h5>
+                    <a href="/Timetables/Index" class="btn btn-primary btn-sm mt-2">Go</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

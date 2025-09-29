@@ -13,6 +13,7 @@ namespace SchoolERP.BLL.Interfaces
         Task<ApiResponse<bool>> AddStudentAsync(Student student);
         Task<ApiResponse<bool>> UpdateStudentAsync(Student student);
         Task<ApiResponse<bool>> DeleteStudentAsync(int id);
+        Task<ApiResponse<int>> GetTotalCount();
         Task<IEnumerable> GetAllAsync();
     }
 }

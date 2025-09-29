@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SchoolERP.Data.Entities;
+using SchoolERP.UI.Helper;
 using SchoolERP.UI.Models;
 
 namespace SchoolERP.UI.Controllers
@@ -38,6 +39,7 @@ namespace SchoolERP.UI.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
+
                 if (user != null)
                 {
                     var result = await _signInManager.PasswordSignInAsync(
@@ -45,24 +47,41 @@ namespace SchoolERP.UI.Controllers
 
                     if (result.Succeeded)
                     {
-                        // ✅ Store session
-                        HttpContext.Session.SetString("UserId", user.Id);
-                        HttpContext.Session.SetString("UserName", user.FullName ?? user.UserName);
-                        HttpContext.Session.SetString("Email", user.Email ?? "");
-
                         var roles = await _userManager.GetRolesAsync(user);
-                        HttpContext.Session.SetString("Role", roles.FirstOrDefault() ?? "User");
+                        SessionHelper.SetString(HttpContext.Session, "Role", roles.FirstOrDefault() ?? "User");
 
+                        // ✅ Store session using SessionHelper
+                        SessionHelper.SetString(HttpContext.Session, "Roles", user.Id);
+                        SessionHelper.SetString(HttpContext.Session, "FullName", user.FullName ?? "");
+                        SessionHelper.SetString(HttpContext.Session, "UserName", user.UserName ?? "");
+                        SessionHelper.SetString(HttpContext.Session, "Email", user.Email ?? "");
+
+                        SessionHelper.SetString(HttpContext.Session, "Role", roles.FirstOrDefault() ?? "User");
+
+                        // ✅ Redirect based on role
+                        if (roles.Contains("Admin"))
+                            return RedirectToAction("AdminDashboard", "Home");
+
+                        if (roles.Contains("Teacher"))
+                            return RedirectToAction("TeacherDashboard", "Home");
+
+                        if (roles.Contains("Student"))
+                            return RedirectToAction("StudentDashboard", "Home");
+
+                        if (roles.Contains("Parent"))
+                            return RedirectToAction("ParentDashboard", "Home");
+
+                        // Default redirect if no role matched
                         return RedirectToLocal(returnUrl);
                     }
-                    else
-                    {
-                        return RedirectToAction("AccessDenied");
-                    }
+
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return View(model);
                 }
-                
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+
+                ModelState.AddModelError(string.Empty, "User not found.");
             }
+
             return View(model);
         }
 
@@ -112,9 +131,13 @@ namespace SchoolERP.UI.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            HttpContext.Session.Clear(); // ✅ clear session
+
+            // Clear session with helper
+            SessionHelper.Clear(HttpContext.Session);
+
             return RedirectToAction("Login", "Account");
         }
+
 
         // 🔹 Access Denied
         [HttpGet]

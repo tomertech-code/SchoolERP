@@ -34,6 +34,7 @@ public partial class Teacher
     public DateTime? EndDate { get; set; }
     public DateTime? StartDate { get; set; }
     public string? City { get; set; }
+    public bool? IsActive { get; set; }
 
     public DateOnly? HireDate { get; set; }
 

@@ -27,6 +27,11 @@ namespace SchoolERP.UI.Controllers
             var timetables = await _timetableService.GetAllTimetablesAsync();
             return View(timetables);
         }
+        public async Task<IActionResult> studentTimeTable()
+        {
+            return View();
+        }
+
 
         // Show form for adding a new timetable
         public IActionResult AddTimetable()

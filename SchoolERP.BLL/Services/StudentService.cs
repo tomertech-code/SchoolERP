@@ -59,6 +59,21 @@ namespace SchoolERP.BLL.Services
             return ApiResponse<bool>.Ok(true, "Student deleted successfully");
         }
 
+
+        public async Task<ApiResponse<int>> GetTotalCount()
+        {
+            try
+            {
+                var students = await _unitOfWork.Repository<Student>().GetAllAsync();
+                var totalCount = students.Count();
+                return ApiResponse<int>.Ok(totalCount);
+            }catch(Exception ex)
+            {
+                throw;
+            }
+            
+        }
+
         public Task<IEnumerable> GetAllAsync()
         {
             throw new NotImplementedException();

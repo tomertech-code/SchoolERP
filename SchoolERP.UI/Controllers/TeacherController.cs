@@ -9,8 +9,8 @@ using SchoolERP.Data.Entities;
 namespace SchoolERP.UI.Controllers
 {
 
-    //[AllowAnonymous]
-    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]
+    //[Authorize(Roles = "Admin")]
     public class TeacherController : Controller
         {
             private readonly ITeacherService _teacherService;
@@ -22,6 +22,7 @@ namespace SchoolERP.UI.Controllers
         }
 
         // GET: Teacher
+        
         public async Task<IActionResult> Index()
         {
             var result = await _teacherService.GetAllTeachersAsync();

@@ -61,5 +61,40 @@ namespace SchoolERP.BLL.Services
             await _unitOfWork.SaveChangesAsync();
             return ApiResponse<bool>.Ok(true, "Teacher deleted successfully");
         }
+
+        public async Task<ApiResponse<int>> GetTotalTeacherCount()
+        {
+            try
+            {
+                var students = await _unitOfWork.Repository<Teacher>().GetAllAsync();
+                var totalCount = students.Count();
+                return ApiResponse<int>.Ok(totalCount);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<ApiResponse<(int Active, int Deactive)>> GetActiveAndDeactiveTeachers()
+        {
+            try
+            {
+                // Fetch all teachers
+                var teachers = await _unitOfWork.Repository<Teacher>().GetAllAsync();
+
+                // Count active and deactive
+                var activeCount = teachers.Count(t => t.IsActive==true);
+                var deactiveCount = teachers.Count(t => t.IsActive==false);
+
+                return ApiResponse<(int Active, int Deactive)>.Ok((activeCount, deactiveCount));
+            }
+            catch (Exception ex)
+            {
+                // Optionally log ex
+                return ApiResponse<(int, int)>.Fail("Failed to get teacher counts: " + ex.Message);
+            }
+        }
+
     }
 }

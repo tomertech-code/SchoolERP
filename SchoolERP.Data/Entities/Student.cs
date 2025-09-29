@@ -35,6 +35,7 @@ public partial class Student
 
     [StringLength(255)]
     public string? Address { get; set; }
+    public bool? IsActive { get; set; }
 
     public DateOnly? EnrollmentDate { get; set; }
 

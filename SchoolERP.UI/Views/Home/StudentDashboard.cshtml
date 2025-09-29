@@ -1,27 +1,654 @@
 ﻿@{
     ViewData["Title"] = "Student Dashboard";
 }
+@{
+    ViewData["Title"] = "Student Dashboard";
+}
 
-<div class="container mt-4">
-    <h2 class="text-info">Welcome, Student</h2>
-    <div class="row mt-4">
-        <div class="col-md-4">
-            <div class="card shadow-sm p-3">
-                <h5>My Assignments</h5>
-                <a href="/Assignments/MyAssignments" class="btn btn-info btn-sm mt-2">View</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+    <link href="~/css/studentdashboard.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <!-- Page Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Student Dashboard</li>
+                    </ol>
+                </nav>
+                <h3 class="mt-2 mb-0">Student Dashboard</h3>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm p-3">
-                <h5>Exams</h5>
-                <a href="/Exams/MyExams" class="btn btn-success btn-sm mt-2">View</a>
+
+        <div class="row g-4">
+            <div class="col-xxl-8">
+                <div class="row g-4">
+                    <!-- Profile -->
+                    <div class="col-xl-6">
+                        <div class="card profile-card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="https://via.placeholder.com/100x100" alt="Student" class="avatar avatar-xxl me-3 rounded-circle">
+                                    <div>
+                                        <span class="badge bg-light text-primary mb-2">#ST1234546</span>
+                                        <h3 class="mb-1">Angelo Riana</h3>
+                                        <div class="d-flex align-items-center text-light">
+                                            <span class="me-3">Class: III, C</span>
+                                            <span>Roll No: 36545</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="me-2">1st Quarterly</h6>
+                                        <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Pass</span>
+                                    </div>
+                                    <button class="btn btn-light">Edit Profile</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mt-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Today’s Classes</h5>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-chevron-left me-2"></i>
+                                    <input type="date" class="form-control form-control-sm" value="2025-09-28">
+                                    <i class="bi bi-chevron-right ms-2"></i>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <img src="https://via.placeholder.com/50x50" alt="Teacher" class="avatar avatar-lg rounded me-2">
+                                            <div>
+                                                <h6 class="mb-1 text-decoration-line-through">English</h6>
+                                                <span><i class="bi bi-clock me-1"></i>09:00 - 09:45 AM</span>
+                                            </div>
+                                        </div>
+                                        <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Completed</span>
+                                    </div>
+                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <img src="https://via.placeholder.com/50x50" alt="Teacher" class="avatar avatar-lg rounded me-2">
+                                            <div>
+                                                <h6 class="mb-1 text-decoration-line-through">Chemistry</h6>
+                                                <span><i class="bi bi-clock me-1"></i>10:45 - 11:30 AM</span>
+                                            </div>
+                                        </div>
+                                        <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Completed</span>
+                                    </div>
+                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <img src="https://via.placeholder.com/50x50" alt="Teacher" class="avatar avatar-lg rounded me-2">
+                                            <div>
+                                                <h6 class="mb-1">Physics</h6>
+                                                <span><i class="bi bi-clock me-1"></i>11:30 - 12:15 PM</span>
+                                            </div>
+                                        </div>
+                                        <span class="badge bg-warning"><i class="bi bi-hourglass-split me-1"></i>In Progress</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Attendance -->
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Attendance</h5>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        <i class="bi bi-calendar me-1"></i>This Week
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">This Week</a></li>
+                                        <li><a class="dropdown-item" href="#">Last Week</a></li>
+                                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-3"><i class="bi bi-calendar-heart text-primary me-2"></i>Total working days: <strong>28 Days</strong></p>
+                                <div class="border rounded p-3 mb-3">
+                                    <div class="row text-center">
+                                        <div class="col-4 border-end">
+                                            <p class="mb-1 small">Present</p>
+                                            <h5 class="text-success mb-0">25</h5>
+                                        </div>
+                                        <div class="col-4 border-end">
+                                            <p class="mb-1 small">Absent</p>
+                                            <h5 class="text-danger mb-0">2</h5>
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="mb-1 small">Half Day</p>
+                                            <h5 class="text-warning mb-0">0</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-light rounded p-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h6 class="mb-0">Last 7 Days</h6>
+                                        <small class="text-muted">22 Sep 2025 - 28 Sep 2025</small>
+                                    </div>
+                                    <div class="d-flex gap-1 flex-wrap">
+                                        <span class="badge bg-success">M</span>
+                                        <span class="badge bg-success">T</span>
+                                        <span class="badge bg-success">W</span>
+                                        <span class="badge bg-success">T</span>
+                                        <span class="badge bg-danger">F</span>
+                                        <span class="badge bg-light text-dark">S</span>
+                                        <span class="badge bg-light text-muted">S</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Quick Links -->
+                    <div class="col-xl-12">
+                        <div class="row g-3">
+                            <div class="col-sm-6 col-xl-3">
+                                <a href="#" class="card border-0 border-bottom border-primary shadow-sm">
+                                    <div class="card-body d-flex align-items-center">
+                                        <i class="bi bi-currency-dollar fs-4 text-primary me-2"></i>
+                                        <h6 class="mb-0">Pay Fees</h6>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-6 col-xl-3">
+                                <a href="#" class="card border-0 border-bottom border-success shadow-sm">
+                                    <div class="card-body d-flex align-items-center">
+                                        <i class="bi bi-bar-chart fs-4 text-success me-2"></i>
+                                        <h6 class="mb-0">Exam Result</h6>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-6 col-xl-3">
+                                <a href="#" class="card border-0 border-bottom border-warning shadow-sm">
+                                    <div class="card-body d-flex align-items-center">
+                                        <i class="bi bi-calendar fs-4 text-warning me-2"></i>
+                                        <h6 class="mb-0">Calendar</h6>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-6 col-xl-3">
+                                <a href="#" class="card border-0 border-bottom border-dark shadow-sm">
+                                    <div class="card-body d-flex align-items-center">
+                                        <i class="bi bi-check-circle fs-4 text-dark me-2"></i>
+                                        <h6 class="mb-0">Attendance</h6>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Schedules -->
+            <div class="col-xxl-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Schedules</h5>
+                        <button class="btn btn-sm btn-primary"><i class="bi bi-plus me-1"></i>Add New</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="calendar-container mb-3">
+                            <!-- Placeholder for calendar. In real, use JS library like FullCalendar -->
+                            <div id="calendar" class="bg-light p-3 rounded">
+                                <h6 class="text-center mb-3">September 2025</h6>
+                                <table class="table table-sm table-borderless text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>Su</th>
+                                            <th>Mo</th>
+                                            <th>Tu</th>
+                                            <th>We</th>
+                                            <th>Th</th>
+                                            <th>Fr</th>
+                                            <th>Sa</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>2</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>6</td>
+                                            <td>7</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td>9</td>
+                                            <td>10</td>
+                                            <td>11</td>
+                                            <td>12</td>
+                                            <td>13</td>
+                                            <td>14</td>
+                                        </tr>
+                                        <tr>
+                                            <td>15</td>
+                                            <td>16</td>
+                                            <td>17</td>
+                                            <td>18</td>
+                                            <td>19</td>
+                                            <td>20</td>
+                                            <td>21</td>
+                                        </tr>
+                                        <tr>
+                                            <td>22</td>
+                                            <td>23</td>
+                                            <td>24</td>
+                                            <td>25</td>
+                                            <td>26</td>
+                                            <td>27</td>
+                                            <td class="bg-primary text-white">28</td>
+                                        </tr>
+                                        <tr>
+                                            <td>29</td>
+                                            <td>30</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <h6 class="mb-3">Exams</h6>
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <h6>1st Quarterly</h6>
+                                    <span class="badge bg-danger"><i class="bi bi-clock me-1"></i>19 Days More</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h6 class="mb-1">Mathematics</h6>
+                                        <p><i class="bi bi-clock me-1"></i>01:30 - 02:15 PM</p>
+                                    </div>
+                                    <div class="text-end">
+                                        <p class="mb-1"><i class="bi bi-calendar me-1"></i>06 Oct 2025</p>
+                                        <p class="text-primary">Room No: 15</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <h6>2nd Quarterly</h6>
+                                    <span class="badge bg-danger"><i class="bi bi-clock me-1"></i>20 Days More</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h6 class="mb-1">Physics</h6>
+                                        <p><i class="bi bi-clock me-1"></i>01:30 - 02:15 PM</p>
+                                    </div>
+                                    <div class="text-end">
+                                        <p class="mb-1"><i class="bi bi-calendar me-1"></i>07 Oct 2025</p>
+                                        <p class="text-primary">Room No: 15</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm p-3">
-                <h5>Complaints</h5>
-                <a href="/StudentComplaints/Create" class="btn btn-danger btn-sm mt-2">Register</a>
+
+        <div class="row g-4 mt-4">
+            <!-- Performance -->
+            <div class="col-xxl-7">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Performance</h5>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-calendar me-1"></i>2024 - 2025
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">2024 - 2025</a></li>
+                                <li><a class="dropdown-item" href="#">2023 - 2024</a></li>
+                                <li><a class="dropdown-item" href="#">2022 - 2023</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Placeholder for performance chart -->
+                        <div id="performance-chart" class="chart-placeholder" style="height: 300px; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">
+                            Performance Chart (Use ApexCharts or Chart.js)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Home Works -->
+            <div class="col-xxl-5">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Home Works</h5>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-book me-1"></i>All Subjects
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Physics</a></li>
+                                <li><a class="dropdown-item" href="#">Chemistry</a></li>
+                                <li><a class="dropdown-item" href="#">Maths</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <div class="list-group-item d-flex align-items-start">
+                                <img src="https://via.placeholder.com/80x50" alt="Homework" class="me-3" style="width: 80px;">
+                                <div class="flex-grow-1">
+                                    <p class="text-primary mb-1"><i class="bi bi-tag me-1"></i>Physics</p>
+                                    <h6 class="mb-1">Write about Theory of Pendulum</h6>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/30x30" alt="Teacher" class="avatar avatar-xs rounded-circle me-1">
+                                        <span>Aaron</span>
+                                        <span class="ms-2">Due: 16 Oct 2025</span>
+                                    </div>
+                                </div>
+                                <div class="circle-progress">
+                                    <div class="progress" style="height: 60px; width: 60px;">
+                                        <!-- Use circular progress library or CSS -->
+                                        <div class="progress-bar bg-success" style="width: 90%;"></div>
+                                    </div>
+                                    <div class="progress-value">90%</div>
+                                </div>
+                            </div>
+                            <!-- Add more homework items similarly -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-4">
+            <!-- Class Faculties -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Class Faculties</h5>
+                        <div class="owl-nav">
+                            <button type="button" class="btn btn-sm btn-outline-secondary me-1"><i class="bi bi-chevron-left"></i></button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="owl-carousel teachers-profile-slider">
+                            <!-- Add teacher cards -->
+                            <div class="item">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <img src="https://via.placeholder.com/80x80" alt="Teacher" class="avatar avatar-lg rounded me-2">
+                                            <div>
+                                                <h6>Aaron</h6>
+                                                <p>Chemistry</p>
+                                            </div>
+                                        </div>
+                                        <div class="row g-2">
+                                            <div class="col-6">
+                                                <button class="btn btn-outline-primary w-100"><i class="bi bi-envelope me-1"></i>Email</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button class="btn btn-outline-primary w-100"><i class="bi bi-chat-dots me-1"></i>Chat</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- More items -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-4">
+            <!-- Leave Status -->
+            <div class="col-xxl-4 col-xl-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Leave Status</h5>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-calendar me-1"></i>This Month
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                                <li><a class="dropdown-item" href="#">Last Week</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-exclamation-triangle-fill text-danger fs-4 me-2"></i>
+                                    <div>
+                                        <h6>Emergency Leave</h6>
+                                        <small>Date: 15 Sep 2025</small>
+                                    </div>
+                                </div>
+                                <span class="badge bg-warning">Pending</span>
+                            </div>
+                            <!-- Add more leave items -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Exam Result -->
+            <div class="col-xxl-4 col-xl-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Exam Result</h5>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-calendar me-1"></i>1st Quarter
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">1st Quarter</a></li>
+                                <li><a class="dropdown-item" href="#">2nd Quarter</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap mb-3">
+                            <span class="badge bg-primary me-2 mb-2">Mat: 100</span>
+                            <span class="badge bg-success me-2 mb-2">Phy: 92</span>
+                            <span class="badge bg-warning me-2 mb-2">Che: 90</span>
+                            <span class="badge bg-danger mb-2">Eng: 80</span>
+                        </div>
+                        <div id="exam-result-chart" class="chart-placeholder" style="height: 250px; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">
+                            Exam Result Chart
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fees Reminder -->
+            <div class="col-xxl-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Fees Reminder</h5>
+                        <a href="#" class="text-primary">View All</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-bus-front fs-4 text-info me-2"></i>
+                                    <div>
+                                        <h6>Transport Fees</h6>
+                                        <p>$2500</p>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <h6>Last Date</h6>
+                                    <p>25 Oct 2025</p>
+                                </div>
+                            </div>
+                            <!-- Add more fees items -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-4">
+            <!-- Notice Board -->
+            <div class="col-xxl-4 col-xl-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Notice Board</h5>
+                        <a href="#" class="text-primary">View All</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-book fs-4 text-primary me-2"></i>
+                                    <div>
+                                        <h6>New Syllabus Instructions</h6>
+                                        <p><i class="bi bi-calendar me-1"></i>Added on: 11 Sep 2025</p>
+                                    </div>
+                                </div>
+                                <i class="bi bi-chevron-right"></i>
+                            </div>
+                            <!-- Add more notices -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Syllabus -->
+            <div class="col-xxl-4 col-xl-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Syllabus</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info mb-3">
+                            These results are based on syllabus completion for the respective class.
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>Maths</span>
+                                <div class="progress w-50">
+                                    <div class="progress-bar bg-primary" style="width: 20%"></div>
+                                </div>
+                            </li>
+                            <!-- Add more subjects -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Todo -->
+            <div class="col-xxl-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Todo</h5>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="bi bi-calendar me-1"></i>Today
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                                <li><a class="dropdown-item" href="#">Last Week</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                    <label class="form-check-label text-decoration-line-through">Send Reminder to Students</label>
+                                </div>
+                                <span class="badge bg-success">Completed</span>
+                            </li>
+                            <!-- Add more todo items -->
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <div class="container mt-4">
+        <h2 class="text-info">Welcome, Student</h2>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3">
+                    <h5>My Assignments</h5>
+                    <a href="/Assignments/MyAssignments" class="btn btn-info btn-sm mt-2">View</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3">
+                    <h5>Exams</h5>
+                    <a href="/Exams/MyExams" class="btn btn-success btn-sm mt-2">View</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3">
+                    <h5>Complaints</h5>
+                    <a href="/StudentComplaints/Create" class="btn btn-danger btn-sm mt-2">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.teachers-profile-slider').owlCarousel({
+                loop: true,
+                margin: 15,
+                nav: true,
+                dots: false,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 5
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

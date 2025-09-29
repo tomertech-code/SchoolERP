@@ -1,0 +1,92 @@
+﻿
+.timetable-grid {
+    display: grid;
+    grid-template-columns: minmax(100px, 1fr) repeat(6, minmax(150px, 1fr));
+    gap: 5px;
+    overflow-x: auto;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.timetable-cell {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    min-height: 100px;
+    transition: transform 0.2s;
+}
+
+    .timetable-cell:hover {
+        transform: scale(1.02);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+.subject-math {
+    background-color: #dbeafe;
+}
+
+.subject-english {
+    background-color: #d1fae5;
+}
+
+.subject-computer {
+    background-color: #fefcbf;
+}
+
+.subject-science {
+    background-color: #fed7e2;
+}
+
+.subject-physics {
+    background-color: #e6d7fa;
+}
+
+.subject-chemistry {
+    background-color: #fed7aa;
+}
+
+.subject-spanish {
+    background-color: #e6f4fa;
+}
+
+.break-card {
+    background-color: #ffffff;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .timetable-grid {
+        grid-template-columns: minmax(80px, 1fr) repeat(6, minmax(120px, 1fr));
+        font-size: 0.8rem;
+    }
+
+    .timetable-cell {
+        min-height: 80px;
+        padding: 5px;
+    }
+
+    .break-card {
+        margin-bottom: 8px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 576px) {
+    .timetable-grid {
+        grid-template-columns: minmax(60px, 1fr) repeat(6, minmax(100px, 1fr));
+        font-size: 0.7rem;
+    }
+
+    .timetable-cell {
+        min-height: 60px;
+        padding: 4px;
+    }
+}
+

@@ -40,7 +40,12 @@ namespace SchoolERP.UI.Controllers
         }
 
         // GET: Students/Details/5
-        public async Task<IActionResult> Details(int id)
+        //[HttpGet]
+        //public async Task<IActionResult> StudentDetails()
+        //{
+        //    return View();
+        //}
+        public async Task<IActionResult> StudentDetails(int id)
             {
                 var result = await _studentService.GetStudentByIdAsync(id);
 
