@@ -27,6 +27,7 @@ namespace SchoolERP.UI.Controllers
 
         public async Task<IActionResult> AdminDashboard()
         {
+            //Login Logins = SessionHelper.GetObjectFromJson<Login>(_httpContextAccessor.HttpContext.Session, "User");
             // Fetch total students
             var studentResponse = await studentService.GetTotalCount();
             var totalStudents = studentResponse.Data;
