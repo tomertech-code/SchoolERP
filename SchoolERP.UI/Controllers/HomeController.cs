@@ -57,7 +57,8 @@ namespace SchoolERP.UI.Controllers
                 TotalTeachers = totalTeachers,
                 ActiveTeachers = activeTeachers,
                 InactiveStudents = deactiveTeachers,
-                TotalSubjects = totalSubjects
+                TotalSubjects = totalSubjects,
+                TotalStaff = 10
             };
 
             return View(dto);
