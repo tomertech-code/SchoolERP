@@ -1,0 +1,46 @@
+﻿.thead-light {
+    background-color: #F2F4F8;
+}
+
+.navbar {
+    background-color: #F2F4F8;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a3c34;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-name {
+    font-size: 1rem;
+    color: #1a3c34;
+}
+
+.logout-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+    .logout-btn:hover {
+        background-color: #c82333;
+    }
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;  full height 
+    background: #fff;
+    border-right: 1px solid #ddd;
+}

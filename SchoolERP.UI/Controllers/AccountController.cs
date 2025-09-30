@@ -260,17 +260,17 @@ namespace SchoolERP.UI.Controllers
         }
 
         // 🔹 POST: Logout
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public async Task<IActionResult> Logout()
+            {
+                await _signInManager.SignOutAsync();
 
-            // Clear session with helper
-            SessionHelper.Clear(HttpContext.Session);
+                // Clear session with helper
+                SessionHelper.Clear(HttpContext.Session);
 
-            return RedirectToAction("Login", "Account");
-        }
+                return RedirectToAction("Login", "Account");
+            }
 
 
         // 🔹 Access Denied
